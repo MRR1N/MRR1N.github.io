@@ -213,20 +213,20 @@ async function sha256(s){
   return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,"0")).join("");
 }
 
-document.addEventListener("keydown", async e => {
-  if (e.ctrlKey && e.shiftKey && (e.key === "8" || e.code === "Digit8")) {
-    const p = prompt("Enter admin password");
-    if (!p) return;
-    const hash = await sha256(p);
-    if (hash === ADMIN_HASH) {
-      sessionStorage.setItem("admin", "1");
-      loadReviews(); // обновим список, чтобы появились кнопки
-      alert("Admin mode enabled!");
+document.addEventListener("keydown", async e=>{
+  if(e.ctrlKey && e.shiftKey && e.key==="8"){
+    const p = prompt("");
+    if(!p) return;
+    const hash = await sha256(p.trim());  // <-- trim() убирает лишние пробелы
+    if(hash === ADMIN_HASH){
+      sessionStorage.setItem("admin","1");
+      loadReviews(); // перезагрузка списка с кнопками удаления
     } else {
       alert("Wrong password");
     }
   }
 });
+
 
 </script>
 
