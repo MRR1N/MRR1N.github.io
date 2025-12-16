@@ -1,47 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MR.R1N - 2D Furry Artist & Animator</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@400;500&display=swap');
-:root{--bg-dark:#251717;--bg-mid:#5B2022;--accent:#EEC785;--text-light:#FCF3F0;--accent-hover:#fff;--shadow:rgba(0,0,0,0.85);}
-*{box-sizing:border-box;margin:0;padding:0;}body{font-family:'Roboto',sans-serif;background:var(--bg-dark);color:var(--text-light);overflow-x:hidden;cursor:url('https://i.ibb.co/2NPy5sP/pointer.png'),auto;}
-a{color:var(--accent);text-decoration:none;transition:.3s;}a:hover{color:var(--accent-hover);}
-header{text-align:center;padding:3rem 1rem;background:linear-gradient(135deg,#3a1d1f,#5B2022);box-shadow:0 0 50px var(--shadow);border-bottom:2px solid var(--accent);animation:fadeInDown 1s ease forwards;}header h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:.5rem;color:var(--accent);text-shadow:0 0 12px var(--accent);animation:letterPop .5s ease forwards;}header p{font-size:1.2rem;color:var(--text-light);text-shadow:0 0 6px #000;}
-nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;animation:fadeInUp 1s ease forwards;}nav a{font-weight:500;font-size:1rem;padding:.5rem 1rem;border-radius:8px;position:relative;transition:all .3s;}nav a::after{content:'';position:absolute;width:0;height:2px;bottom:0;left:0;background:var(--accent);transition:.3s;}nav a:hover::after{width:100%;}
-.lang-switch{text-align:center;margin:3rem 0 2rem 0;}.lang-switch button{margin:0 .5rem;padding:.5rem 1rem;border:none;border-radius:8px;cursor:pointer;background:var(--accent);color:var(--bg-dark);font-weight:bold;transition:.3s;box-shadow:0 0 12px var(--shadow);}.lang-switch button:hover{background:var(--accent-hover);color:var(--bg-dark);transform:scale(1.05);}
-section{max-width:900px;margin:0 auto 4rem auto;padding:0 1rem;}
-h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;color:var(--accent);border-bottom:2px solid var(--accent);display:inline-block;padding-bottom:.3rem;text-shadow:0 0 10px var(--accent);text-align:center;}
-p,li{line-height:1.6;margin-bottom:.8rem;}ul{list-style:none;padding-left:0;}li{margin-bottom:.5rem;}
-.card{background:var(--bg-mid);padding:2rem;border-radius:18px;margin-bottom:3rem;box-shadow:0 0 60px var(--shadow);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
-.card::before{content:'';position:absolute;width:100%;height:100%;background:radial-gradient(circle at top left,rgba(255,236,133,.08),transparent);top:0;left:0;pointer-events:none;}
-.card:hover{transform:translateY(-5px);box-shadow:0 0 90px var(--shadow);}
-.reviews{margin-top:2rem;}.reviews-toggle{cursor:pointer;color:var(--accent);font-weight:bold;font-size:1.5rem;transition:color .3s;}.reviews-toggle:hover{color:var(--accent-hover);}
-.review-form input,.review-form textarea{width:100%;padding:.6rem;margin-bottom:1rem;border-radius:8px;border:none;background:#2d1d1d;color:var(--text-light);}
-.review-form button{background:var(--accent);color:var(--bg-dark);border:none;padding:.6rem 1.2rem;cursor:pointer;font-weight:bold;border-radius:8px;transition:.3s;box-shadow:0 0 12px var(--shadow);}.review-form button:hover{background:var(--accent-hover);color:var(--bg-dark);transform:scale(1.05);}
-.review-item{border-bottom:1px solid var(--accent);padding:.5rem 0;display:flex;align-items:center;animation:fadeIn .5s ease forwards;position:relative;}
-.review-avatar{width:42px;height:42px;border-radius:50%;margin-right:.8rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--accent);color:var(--bg-dark);font-weight:bold;box-shadow:0 0 10px var(--accent);}
-.delete-btn{position:absolute;right:0;opacity:0;background:transparent;border:none;cursor:pointer;font-weight:bold;font-size:1.3rem;color:#ff5f5f;transition:all .3s;}.review-item:hover .delete-btn{opacity:1;transform:scale(1.3);color:#ff1a1a;}
-footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9rem;color:var(--text-light);box-shadow:0 -5px 30px var(--shadow);}
-.tos-content{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:.5rem;padding-left:.5rem;border-left:2px solid var(--accent);}
-.tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;transition:color .3s;display:inline-block;margin-bottom:.5rem;}.tos-toggle:hover{color:var(--accent-hover);}
-.review-write{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:1rem;}
-.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);display:flex;justify-content:center;align-items:center;z-index:1000;}
-.modal{background:linear-gradient(145deg,#3a1d1f,#5B2022);padding:2rem;border-radius:20px;text-align:center;max-width:400px;box-shadow:0 0 60px var(--shadow);animation:fadeIn .8s ease forwards;transition:transform .3s;}.modal:hover{transform:scale(1.03);}
-.modal img{max-width:150px;margin-bottom:1rem;border-radius:50%;box-shadow:0 0 18px var(--accent);transition:transform .3s;}.modal img:hover{transform:scale(1.05);}
-.modal p{margin-bottom:1rem;font-weight:bold;font-size:1.2rem;color:var(--accent);}
-.modal button{margin:.5rem;padding:.6rem 1.2rem;border:none;border-radius:10px;cursor:pointer;font-weight:bold;background:var(--accent);color:var(--bg-dark);transition:.3s;box-shadow:0 0 15px var(--shadow);}.modal button:hover{background:var(--accent-hover);transform:scale(1.05);}
-.pricing-columns{display:flex;justify-content:space-between;gap:2rem;}
-.pricing-column{flex:1;text-align:center;}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes letterPop{0%{opacity:0;transform:scale(0);}100%{opacity:1;transform:scale(1);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-</style>
-</head>
 <body>
+
+<div class="modal-bg" id="ageModal">
+  <div class="modal">
+    <img src="sprite1.png" alt="avatar">
+    <p id="modalText">Are you adult enough?</p>
+    <button id="adult-yes">Yes</button>
+    <button id="adult-no">No</button>
+  </div>
+</div>
+
+<header>
+  <h1>MR.R1N</h1>
+  <p id="header-desc">2D Furry Artist & Animator</p>
+</header>
+
+<div class="lang-switch">
+  <button id="btn-en">EN</button>
+  <button id="btn-ru">RU</button>
+  <button id="btn-es">ES</button>
+</div>
+
+<nav>
+  <a href="#">FA</a>
+  <a href="#">Twitter</a>
+  <a href="#">Telegram</a>
+</nav>
+
+<section>
+  <div class="card">
+    <h2 id="pricing-title">Pricing</h2>
+    <div id="pricing-content-en" class="pricing-columns"> ... </div>
+    <div id="pricing-content-ru" class="pricing-columns" style="display:none;"> ... </div>
+    <div id="pricing-content-es" class="pricing-columns" style="display:none;"> ... </div>
+  </div>
+
+  <div class="card">
+    <h2 class="reviews-toggle" onclick="toggleReviewForm()" id="reviews-title">Reviews</h2>
+    <div id="existing-reviews"></div>
+    <div id="review-write" class="review-write">
+      <form class="review-form" onsubmit="submitReview(event)">
+        <input id="nickname" placeholder="Nickname">
+        <textarea id="review" placeholder="Your review"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="tos-toggle" onclick="toggleTOS()">TOS (Click to expand)</div>
+    <div id="tos-content" class="tos-content"> ... </div>
+  </div>
+</section>
+
+<footer>© MR.R1N 2025</footer>
+
+<script>
+/* --- Age modal --- */
+const ageModal = document.getElementById('ageModal');
+const adultYesBtn = document.getElementById('adult-yes');
+const adultNoBtn = document.getElementById('adult-no');
+if(localStorage.getItem('adultConfirmed')==='true') ageModal.style.display='none';
+adultYesBtn.addEventListener('click',()=>{localStorage.setItem('adultConfirmed','true');ageModal.style.display='none';});
+adultNoBtn.addEventListener('click',()=>{document.getElementById('modalText').textContent='Refresh the page to try again';adultYesBtn.style.display='none';adultNoBtn.style.display='none';});
+
+/* --- Language switching --- */
+function switchLang(l){
+  const h=document.getElementById('header-desc'),p=document.getElementById('pricing-title'),r=document.getElementById('reviews-title');
+  const n=document.getElementById('nickname'),t=document.getElementById('review');
+  const b=document.querySelector('#review-write button');
+  if(l==='ru'){h.textContent='2D Фурри художник и аниматор';p.textContent='Прайс-лист';r.textContent='Отзывы';n.placeholder='Никнейм';t.placeholder='Ваш отзыв';b.textContent='Отправить';}
+  else if(l==='es'){h.textContent='Artista y Animador Furry 2D';p.textContent='Precios';r.textContent='Reseñas';n.placeholder='Apodo';t.placeholder='Tu reseña';b.textContent='Enviar reseña';}
+  else{h.textContent='2D Furry Artist & Animator';p.textContent='Pricing';r.textContent='Reviews';n.placeholder='Nickname';t.placeholder='Your review';b.textContent='Submit';}
+  ['en','ru','es'].forEach(x=>document.getElementById('pricing-content-'+x).style.display='none');
+  document.getElementById('pricing-content-'+l).style.display='flex';
+}
+document.getElementById('btn-en').addEventListener('click',()=>switchLang('en'));
+document.getElementById('btn-ru').addEventListener('click',()=>switchLang('ru'));
+document.getElementById('btn-es').addEventListener('click',()=>switchLang('es'));
+
+/* --- Review form toggle --- */
+function toggleReviewForm(){const r=document.getElementById('review-write');r.style.maxHeight=r.style.maxHeight&&r.style.maxHeight!=='0px'?'0':r.scrollHeight+'px';}
+function toggleTOS(){const t=document.getElementById('tos-content');t.style.maxHeight=t.style.maxHeight&&t.style.maxHeight!=='0px'?'0':t.scrollHeight+'px';}
+
+/* --- Firebase reviews (global) --- */
+const reviewsList = document.getElementById('existing-reviews');
+
+function loadReviews(){
+  db.ref('reviews').once('value', snapshot=>{
+    const data = snapshot.val() || [];
+    reviewsList.innerHTML = '';
+    data.forEach((e,i)=>{
+      const d=document.createElement('div');
+      d.className='review-item';
+      if(sessionStorage.getItem('admin')){
+        d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span> <button class='delete-btn' data-index='${i}'>✖</button>`;
+      } else {
+        d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span>`;
+      }
+      reviewsList.appendChild(d);
+    });
+  });
+}
+
+function submitReview(e){
+  e.preventDefault();
+  const nickname=document.getElementById('nickname');
+  const review=document.getElementById('review');
+  if(!nickname.value.trim()){nickname.setCustomValidity('Заполните это поле');nickname.reportValidity();return;} else nickname.setCustomValidity('');
+  if(!review.value.trim()){review.setCustomValidity('Заполните это поле');review.reportValidity();return;} else review.setCustomValidity('');
+  db.ref('reviews').once('value', snapshot=>{
+    const data=snapshot.val()||[];
+    data.push({nickname:nickname.value,text:review.value});
+    db.ref('reviews').set(data).then(()=>{
+      nickname.value=''; review.value=''; loadReviews();
+    });
+  });
+}
+
+/* --- Delete review (admin only) --- */
+reviewsList.addEventListener('click', e=>{
+  if(e.target.classList.contains('delete-btn') && sessionStorage.getItem('admin')){
+    const index=e.target.dataset.index;
+    db.ref('reviews').once('value', snapshot=>{
+      const data=snapshot.val()||[];
+      data.splice(index,1);
+      db.ref('reviews').set(data).then(loadReviews);
+    });
+  }
+});
+
+/* --- Initial load --- */
+loadReviews();
+
+/* --- Admin password check --- */
+const ADMIN_HASH="ТВОЙ_SHA256_HASH";
+async function sha256(s){const b=new TextEncoder().encode(s);const h=await crypto.subtle.digest("SHA-256",b);return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+document.addEventListener("keydown", async e=>{
+  if(e.ctrlKey && e.shiftKey && e.key==="8"){
+    const p=prompt("Enter admin password:");
+    if(!p) return;
+    if(await sha256(p)===ADMIN_HASH){
+      sessionStorage.setItem("admin","1");
+      loadReviews();
+    } else {alert("Wrong password");}
+  }
+});
+</script>
+
+</body>
+</html>
+
 
 <div class="modal-bg" id="ageModal">
   <div class="modal" id="modalContent">
