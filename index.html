@@ -205,7 +205,7 @@ function toggleReviewForm(){const r=document.getElementById('review-write');r.st
 function toggleTOS(){const t=document.getElementById('tos-content');t.style.maxHeight=t.style.maxHeight&&t.style.maxHeight!=='0px'?'0':t.scrollHeight+'px';}
 loadReviews();
 
-const ADMIN_HASH = "31ee26189d3a77e57189787b278f59af2f8d2e1fd1d08d7a1b585fcdbde7a41b";
+const ADMIN_HASH = "4a00129cbb22404def25ed8d43039b4567279b9de244537af43c3b9166214b71";
 
 async function sha256(s){
   const b = new TextEncoder().encode(s);
@@ -214,14 +214,14 @@ async function sha256(s){
 }
 
 document.addEventListener("keydown", async e=>{
-  // Проверяем Ctrl + Shift + 8 на верхнем ряду клавиатуры
+
   if(e.ctrlKey && e.shiftKey && e.code==="Digit8"){
-    const p = prompt("Enter admin password:"); // prompt точно появится
+    const p = prompt("Enter admin password:"); 
     if(!p) return;
     const hash = await sha256(p.trim());
     if(hash === ADMIN_HASH){
       sessionStorage.setItem("admin","1");
-      loadReviews(); // показать кнопки удаления
+      loadReviews(); 
       alert("Admin mode enabled");
     } else {
       alert("Wrong password");
