@@ -11,9 +11,9 @@
 a{color:var(--accent);text-decoration:none;transition:.3s;}a:hover{color:var(--accent-hover);}
 header{text-align:center;padding:3rem 1rem;background:linear-gradient(135deg,#3a1d1f,#5B2022);box-shadow:0 0 50px var(--shadow);border-bottom:2px solid var(--accent);animation:fadeInDown 1s ease forwards;}header h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:.5rem;color:var(--accent);text-shadow:0 0 12px var(--accent);animation:letterPop .5s ease forwards;}header p{font-size:1.2rem;color:var(--text-light);text-shadow:0 0 6px #000;}
 nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;animation:fadeInUp 1s ease forwards;}nav a{font-weight:500;font-size:1rem;padding:.5rem 1rem;border-radius:8px;position:relative;transition:all .3s;}nav a::after{content:'';position:absolute;width:0;height:2px;bottom:0;left:0;background:var(--accent);transition:.3s;}nav a:hover::after{width:100%;}
-.lang-switch{text-align:center;margin-bottom:2rem;}.lang-switch button{margin:0 .5rem;padding:.5rem 1rem;border:none;border-radius:8px;cursor:pointer;background:var(--accent);color:var(--bg-dark);font-weight:bold;transition:.3s;box-shadow:0 0 12px var(--shadow);}.lang-switch button:hover{background:var(--accent-hover);color:var(--bg-dark);transform:scale(1.05);}
+.lang-switch{text-align:center;margin:3rem 0 2rem 0;}.lang-switch button{margin:0 .5rem;padding:.5rem 1rem;border:none;border-radius:8px;cursor:pointer;background:var(--accent);color:var(--bg-dark);font-weight:bold;transition:.3s;box-shadow:0 0 12px var(--shadow);}.lang-switch button:hover{background:var(--accent-hover);color:var(--bg-dark);transform:scale(1.05);}
 section{max-width:900px;margin:0 auto 4rem auto;padding:0 1rem;}
-h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;color:var(--accent);border-bottom:2px solid var(--accent);display:inline-block;padding-bottom:.3rem;text-shadow:0 0 10px var(--accent);}
+h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;color:var(--accent);border-bottom:2px solid var(--accent);display:inline-block;padding-bottom:.3rem;text-shadow:0 0 10px var(--accent);text-align:center;}
 p,li{line-height:1.6;margin-bottom:.8rem;}ul{list-style:none;padding-left:0;}li{margin-bottom:.5rem;}
 .card{background:var(--bg-mid);padding:2rem;border-radius:18px;margin-bottom:3rem;box-shadow:0 0 60px var(--shadow);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
 .card::before{content:'';position:absolute;width:100%;height:100%;background:radial-gradient(circle at top left,rgba(255,236,133,.08),transparent);top:0;left:0;pointer-events:none;}
@@ -25,13 +25,20 @@ p,li{line-height:1.6;margin-bottom:.8rem;}ul{list-style:none;padding-left:0;}li{
 .review-avatar{width:42px;height:42px;border-radius:50%;margin-right:.8rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--accent);color:var(--bg-dark);font-weight:bold;box-shadow:0 0 10px var(--accent);}
 .delete-btn{position:absolute;right:0;opacity:0;background:transparent;border:none;cursor:pointer;font-weight:bold;font-size:1.3rem;color:#ff5f5f;transition:all .3s;}.review-item:hover .delete-btn{opacity:1;transform:scale(1.3);color:#ff1a1a;}
 footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9rem;color:var(--text-light);box-shadow:0 -5px 30px var(--shadow);}
-.tos-content{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:.5rem;padding-left:.5rem;border-left:2px solid var(--accent);}.tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;transition:color .3s;display:inline-block;margin-bottom:.5rem;}.tos-toggle:hover{color:var(--accent-hover);}
+.tos-content{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:.5rem;padding-left:.5rem;border-left:2px solid var(--accent);}
+.tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;transition:color .3s;display:inline-block;margin-bottom:.5rem;}.tos-toggle:hover{color:var(--accent-hover);}
 .review-write{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:1rem;}
-.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);display:flex;justify-content:center;align-items:center;z-index:1000;}.modal{background:linear-gradient(145deg,#3a1d1f,#5B2022);padding:2rem;border-radius:20px;text-align:center;max-width:400px;box-shadow:0 0 60px var(--shadow);animation:fadeIn .8s ease forwards;transition:transform .3s;}.modal:hover{transform:scale(1.03);}
+.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);display:flex;justify-content:center;align-items:center;z-index:1000;}
+.modal{background:linear-gradient(145deg,#3a1d1f,#5B2022);padding:2rem;border-radius:20px;text-align:center;max-width:400px;box-shadow:0 0 60px var(--shadow);animation:fadeIn .8s ease forwards;transition:transform .3s;}.modal:hover{transform:scale(1.03);}
 .modal img{max-width:150px;margin-bottom:1rem;border-radius:50%;box-shadow:0 0 18px var(--accent);transition:transform .3s;}.modal img:hover{transform:scale(1.05);}
 .modal p{margin-bottom:1rem;font-weight:bold;font-size:1.2rem;color:var(--accent);}
 .modal button{margin:.5rem;padding:.6rem 1.2rem;border:none;border-radius:10px;cursor:pointer;font-weight:bold;background:var(--accent);color:var(--bg-dark);transition:.3s;box-shadow:0 0 15px var(--shadow);}.modal button:hover{background:var(--accent-hover);transform:scale(1.05);}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}@keyframes letterPop{0%{opacity:0;transform:scale(0);}100%{opacity:1;transform:scale(1);}}@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.pricing-columns{display:flex;justify-content:space-between;gap:2rem;}
+.pricing-column{flex:1;text-align:center;}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes letterPop{0%{opacity:0;transform:scale(0);}100%{opacity:1;transform:scale(1);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 </style>
 </head>
 <body>
@@ -66,35 +73,47 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 <section>
 <div class="card" id="pricing">
 <h2 id="pricing-title">Pricing</h2>
-<div id="pricing-content-en">
+<div id="pricing-content-en" class="pricing-columns">
+<div class="pricing-column">
 <h3>Art & Comics</h3>
 <ul>
 <li>One character: $95</li>
 <li>Two characters: $160</li>
 <li>One page comic (5-6 frames): $300</li>
 </ul>
+</div>
+<div class="pricing-column">
 <h3>Animation</h3>
 <p>Pricing varies; contact for details.</p>
 </div>
-<div id="pricing-content-ru" style="display:none;">
+</div>
+<div id="pricing-content-ru" class="pricing-columns" style="display:none;">
+<div class="pricing-column">
 <h3>Арт и Комиксы</h3>
 <ul>
 <li>Один персонаж: $95</li>
 <li>Два персонажа: $160</li>
 <li>Комикс на одну страницу (5-6 кадров): $300</li>
 </ul>
+</div>
+<div class="pricing-column">
 <h3>Анимация</h3>
 <p>Цены уточняйте, включая доплаты.</p>
 </div>
-<div id="pricing-content-es" style="display:none;">
+</div>
+<div id="pricing-content-es" class="pricing-columns" style="display:none;">
+<div class="pricing-column">
 <h3>Arte y Cómics</h3>
 <ul>
 <li>Un personaje: $95</li>
 <li>Dos personajes: $160</li>
 <li>Cómic de una página (5-6 cuadros): $300</li>
 </ul>
+</div>
+<div class="pricing-column">
 <h3>Animación</h3>
 <p>Los precios varían; contactar para detalles.</p>
+</div>
 </div>
 </div>
 
@@ -109,7 +128,7 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 <h2 class="reviews-toggle" id="reviews-title" onclick="toggleReviewForm()">Reviews</h2>
 <div id="existing-reviews"></div>
 <div class="review-write" id="review-write">
-<form class="review-form">
+<form class="review-form" onsubmit="submitReview(event)">
 <input type="text" placeholder="Nickname (English, max 37 chars)" maxlength="37" id="nickname" required>
 <textarea placeholder="Your review" rows="3" id="review" required></textarea>
 <button type="submit">Submit Review</button>
@@ -135,38 +154,39 @@ r.textContent='Отзывы';
 n.placeholder='Никнейм';
 t.placeholder='Ваш отзыв';
 b.textContent='Отправить';
-n.setCustomValidity('Заполните это поле');
-t.setCustomValidity('Заполните это поле');
+n.setCustomValidity('');
+t.setCustomValidity('');
+title='Заполните это поле';
 tos.textContent='Условия *нажмите, чтобы развернуть';
 document.getElementById('pricing-content-en').style.display='none';
-document.getElementById('pricing-content-ru').style.display='block';
+document.getElementById('pricing-content-ru').style.display='flex';
 document.getElementById('pricing-content-es').style.display='none';
-}
-else if(l==='es'){
+}else if(l==='es'){
 h.textContent='Artista y Animador Furry 2D';
 p.textContent='Precios';
 r.textContent='Reseñas (haz clic para dejar la tuya)';
 n.placeholder='Apodo';
 t.placeholder='Tu reseña';
 b.textContent='Enviar reseña';
-n.setCustomValidity('Por favor, complete este campo');
-t.setCustomValidity('Por favor, complete este campo');
+n.setCustomValidity('');
+t.setCustomValidity('');
+title='Por favor, complete este campo';
 tos.textContent='Términos de Servicio (clic para expandir)';
 document.getElementById('pricing-content-en').style.display='none';
 document.getElementById('pricing-content-ru').style.display='none';
-document.getElementById('pricing-content-es').style.display='block';
-}
-else{
+document.getElementById('pricing-content-es').style.display='flex';
+}else{
 h.textContent='2D Furry Artist & Animator';
 p.textContent='Pricing';
 r.textContent='Reviews *click';
 n.placeholder='Nickname';
 t.placeholder='Your review';
 b.textContent='Submit';
-n.setCustomValidity('Please fill out this field');
-t.setCustomValidity('Please fill out this field');
+n.setCustomValidity('');
+t.setCustomValidity('');
+title='Please fill out this field';
 tos.textContent='TOS (Click to expand)';
-document.getElementById('pricing-content-en').style.display='block';
+document.getElementById('pricing-content-en').style.display='flex';
 document.getElementById('pricing-content-ru').style.display='none';
 document.getElementById('pricing-content-es').style.display='none';
 }}
@@ -189,6 +209,19 @@ d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong
 reviewsList.appendChild(d);
 });
 }
+
+function submitReview(event){
+event.preventDefault();
+const nickname=document.getElementById('nickname');
+const review=document.getElementById('review');
+if(!nickname.value.trim() || !review.value.trim()) return;
+const r=JSON.parse(localStorage.getItem('reviews')||'[]');
+r.push({nickname:nickname.value.trim(),text:review.value.trim()});
+localStorage.setItem('reviews',JSON.stringify(r));
+loadReviews();
+nickname.value=''; review.value='';
+}
+
 reviewsList.addEventListener('click',e=>{
 if(e.target.classList.contains('delete-btn') && localStorage.getItem('admin')==='true'){
 const i=e.target.dataset.index,r=JSON.parse(localStorage.getItem('reviews')||'[]');
@@ -197,10 +230,5 @@ localStorage.setItem('reviews',JSON.stringify(r));
 loadReviews();
 }
 });
-function toggleReviewForm(){const r=document.getElementById('review-write');r.style.maxHeight=r.style.maxHeight&&r.style.maxHeight!=='0px'?'0':r.scrollHeight+'px';}
-function toggleTOS(){const t=document.getElementById('tos-content');t.style.maxHeight=t.style.maxHeight&&t.style.maxHeight!=='0px'?'0':t.scrollHeight+'px';}
-loadReviews();
-</script>
 
-</body>
-</html>
+function toggleReviewForm(){const r=document.getElementById('review-write');r.style.maxHeight=r.style.maxHeight&&r.style.max
