@@ -214,19 +214,20 @@ async function sha256(s){
 }
 
 document.addEventListener("keydown", async e=>{
-  if(e.ctrlKey && e.shiftKey && e.key==="8"){
-    const p = prompt("");
+  // Проверяем Ctrl + Shift + 8 на верхнем ряду клавиатуры
+  if(e.ctrlKey && e.shiftKey && e.code==="Digit8"){
+    const p = prompt("Enter admin password:"); // prompt точно появится
     if(!p) return;
-    const hash = await sha256(p.trim());  // <-- trim() убирает лишние пробелы
+    const hash = await sha256(p.trim());
     if(hash === ADMIN_HASH){
       sessionStorage.setItem("admin","1");
-      loadReviews(); // перезагрузка списка с кнопками удаления
+      loadReviews(); // показать кнопки удаления
+      alert("Admin mode enabled");
     } else {
       alert("Wrong password");
     }
   }
 });
-
 
 </script>
 
