@@ -39,9 +39,9 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 <div class="modal-bg" id="ageModal">
 <div class="modal" id="modalContent">
 <img src="sprite1.png" alt="Character Sprite">
-<p id="modalText">А ты уже взрослый, приятель?</p>
-<button id="adult-yes">Да, черт возьми!</button>
-<button id="adult-no">Нет, я маленький хвостик</button>
+<p id="modalText">Are you adult enough, buddy?</p>
+<button id="adult-yes">Yes, damn right!</button>
+<button id="adult-no">No, I'm a little tail</button>
 </div>
 </div>
 
@@ -50,9 +50,10 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 <p id="header-desc">2D Furry Artist & Animator</p>
 </header>
 
-<div class="lang-switch">
-<button id="btn-en">English</button>
-<button id="btn-ru">Русский</button>
+<div class="lang-switch lang-corner">
+<button id="btn-en">EN</button>
+<button id="btn-ru">RU</button>
+<button id="btn-es">ES</button>
 </div>
 
 <nav>
@@ -85,6 +86,16 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 <h3>Анимация</h3>
 <p>Цены уточняйте, включая доплаты.</p>
 </div>
+<div id="pricing-content-es" style="display:none;">
+<h3>Arte y Cómics</h3>
+<ul>
+<li>Un personaje: $95</li>
+<li>Dos personajes: $160</li>
+<li>Cómic de una página (5-6 cuadros): $300</li>
+</ul>
+<h3>Animación</h3>
+<p>Los precios varían; contactar para detalles.</p>
+</div>
 </div>
 
 <div class="card" id="tos">
@@ -105,22 +116,87 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 </form>
 </div>
 </div>
-</div>
 </section>
 
 <footer>© 2025 Сань. All rights reserved.</footer>
 
 <script>
 const ageModal=document.getElementById('ageModal'),modalContent=document.getElementById('modalContent'),adultYesBtn=document.getElementById('adult-yes'),adultNoBtn=document.getElementById('adult-no');
-function confirmAdult(a){if(a){localStorage.setItem('adultConfirmed','true');ageModal.style.display='none';}else{document.querySelector('#modalContent img').src='sprite2.png';document.querySelector('#modalText').textContent='Обновите страницу, чтобы попробовать снова';adultYesBtn.style.display='none';adultNoBtn.style.display='none';}}
+function confirmAdult(a){if(a){localStorage.setItem('adultConfirmed','true');ageModal.style.display='none';}else{document.querySelector('#modalContent img').src='sprite2.png';document.querySelector('#modalText').textContent='Refresh the page to try again';adultYesBtn.style.display='none';adultNoBtn.style.display='none';}}
 if(localStorage.getItem('adultConfirmed')==='true')ageModal.style.display='none';
 adultYesBtn.addEventListener('click',()=>confirmAdult(true));adultNoBtn.addEventListener('click',()=>confirmAdult(false));
 
-function switchLang(l){const h=document.getElementById('header-desc'),p=document.getElementById('pricing-title'),r=document.getElementById('reviews-title'),n=document.querySelector('#review-write input'),t=document.querySelector('#review-write textarea'),b=document.querySelector('#review-write button');if(l==='ru'){h.textContent='2D Фурри художник и аниматор';p.textContent='Прайс-лист';r.textContent='Отзывы (нажмите, чтобы оставить свой)';n.placeholder='Никнейм (англ., макс 37 символов)';t.placeholder='Ваш отзыв';b.textContent='Отправить отзыв';document.getElementById('pricing-content-en').style.display='none';document.getElementById('pricing-content-ru').style.display='block';document.querySelector('.tos-toggle').textContent='Условия (нажмите, чтобы развернуть)';}else{h.textContent='2D Furry Artist & Animator';p.textContent='Pricing';r.textContent='Reviews (click to add your own)';n.placeholder='Nickname (English, max 37 chars)';t.placeholder='Your review';b.textContent='Submit Review';document.getElementById('pricing-content-en').style.display='block';document.getElementById('pricing-content-ru').style.display='none';document.querySelector('.tos-toggle').textContent='TOS (Click to expand)';}}
-document.getElementById('btn-en').addEventListener('click',()=>switchLang('en'));document.getElementById('btn-ru').addEventListener('click',()=>switchLang('ru'));
+function switchLang(l){
+const h=document.getElementById('header-desc'),p=document.getElementById('pricing-title'),r=document.getElementById('reviews-title'),n=document.querySelector('#review-write input'),t=document.querySelector('#review-write textarea'),b=document.querySelector('#review-write button'),tos=document.querySelector('.tos-toggle');
+if(l==='ru'){
+h.textContent='2D Фурри художник и аниматор';
+p.textContent='Прайс-лист';
+r.textContent='Отзывы (нажмите, чтобы оставить свой)';
+n.placeholder='Никнейм (англ., макс 37 символов)';
+t.placeholder='Ваш отзыв';
+b.textContent='Отправить отзыв';
+n.setCustomValidity('Заполните это поле');
+t.setCustomValidity('Заполните это поле');
+tos.textContent='Условия (нажмите, чтобы развернуть)';
+document.getElementById('pricing-content-en').style.display='none';
+document.getElementById('pricing-content-ru').style.display='block';
+document.getElementById('pricing-content-es').style.display='none';
+}
+else if(l==='es'){
+h.textContent='Artista y Animador Furry 2D';
+p.textContent='Precios';
+r.textContent='Reseñas (haz clic para dejar la tuya)';
+n.placeholder='Apodo (inglés, máx. 37 caracteres)';
+t.placeholder='Tu reseña';
+b.textContent='Enviar reseña';
+n.setCustomValidity('Por favor, complete este campo');
+t.setCustomValidity('Por favor, complete este campo');
+tos.textContent='Términos de Servicio (clic para expandir)';
+document.getElementById('pricing-content-en').style.display='none';
+document.getElementById('pricing-content-ru').style.display='none';
+document.getElementById('pricing-content-es').style.display='block';
+}
+else{
+h.textContent='2D Furry Artist & Animator';
+p.textContent='Pricing';
+r.textContent='Reviews (click to add your own)';
+n.placeholder='Nickname (English, max 37 chars)';
+t.placeholder='Your review';
+b.textContent='Submit Review';
+n.setCustomValidity('Please fill out this field');
+t.setCustomValidity('Please fill out this field');
+tos.textContent='TOS (Click to expand)';
+document.getElementById('pricing-content-en').style.display='block';
+document.getElementById('pricing-content-ru').style.display='none';
+document.getElementById('pricing-content-es').style.display='none';
+}}
+document.getElementById('btn-en').addEventListener('click',()=>switchLang('en'));
+document.getElementById('btn-ru').addEventListener('click',()=>switchLang('ru'));
+document.getElementById('btn-es').addEventListener('click',()=>switchLang('es'));
 
-const reviewsList=document.getElementById('existing-reviews');function loadReviews(){const r=JSON.parse(localStorage.getItem('reviews')||'[]');reviewsList.innerHTML='';r.forEach((e,i)=>{const d=document.createElement('div');d.className='review-item';d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span> <button class='delete-btn' data-index='${i}'>✖</button>`;reviewsList.appendChild(d);});}
-reviewsList.addEventListener('click',e=>{if(e.target.classList.contains('delete-btn')){const i=e.target.dataset.index,r=JSON.parse(localStorage.getItem('reviews')||'[]');r.splice(i,1);localStorage.setItem('reviews',JSON.stringify(r));loadReviews();}});
+const reviewsList=document.getElementById('existing-reviews');
+function loadReviews(){
+const r=JSON.parse(localStorage.getItem('reviews')||'[]');
+reviewsList.innerHTML='';
+r.forEach((e,i)=>{
+const d=document.createElement('div');
+d.className='review-item';
+if(localStorage.getItem('admin')==='true'){
+d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span> <button class='delete-btn' data-index='${i}'>✖</button>`;
+}else{
+d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span>`;
+}
+reviewsList.appendChild(d);
+});
+}
+reviewsList.addEventListener('click',e=>{
+if(e.target.classList.contains('delete-btn') && localStorage.getItem('admin')==='true'){
+const i=e.target.dataset.index,r=JSON.parse(localStorage.getItem('reviews')||'[]');
+r.splice(i,1);
+localStorage.setItem('reviews',JSON.stringify(r));
+loadReviews();
+}
+});
 function toggleReviewForm(){const r=document.getElementById('review-write');r.style.maxHeight=r.style.maxHeight&&r.style.maxHeight!=='0px'?'0':r.scrollHeight+'px';}
 function toggleTOS(){const t=document.getElementById('tos-content');t.style.maxHeight=t.style.maxHeight&&t.style.maxHeight!=='0px'?'0':t.scrollHeight+'px';}
 loadReviews();
