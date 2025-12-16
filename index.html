@@ -171,12 +171,28 @@ reviewsList.appendChild(d);
 }
 
 function submitReview(e){
-e.preventDefault();
-const nickname=document.getElementById('nickname');
-const review=document.getElementById('review');
-if(!nickname.value.trim()){nickname.setCustomValidity('Заполните это поле');nickname.reportValidity();return;}
-if(!review.value.trim()){review.setCustomValidity('Заполните это поле');review.reportValidity();return;}
-const r=JSON.parse(localStorage.getItem('reviews')||'[]');r.push({nickname:nickname.value,text:review.value});localStorage.setItem('reviews',JSON.stringify(r));loadReviews();nickname.value='';review.value='';
+    e.preventDefault();
+    const nickname = document.getElementById('nickname');
+    const review = document.getElementById('review');
+
+    if(!nickname.value.trim()){
+        nickname.setCustomValidity('Заполните это поле');
+        nickname.reportValidity();
+        return;
+    } else nickname.setCustomValidity(''); // сброс ошибки
+
+    if(!review.value.trim()){
+        review.setCustomValidity('Заполните это поле');
+        review.reportValidity();
+        return;
+    } else review.setCustomValidity(''); // сброс ошибки
+
+    const r = JSON.parse(localStorage.getItem('reviews')||'[]');
+    r.push({nickname:nickname.value, text:review.value});
+    localStorage.setItem('reviews', JSON.stringify(r));
+    loadReviews();
+    nickname.value = '';
+    review.value = '';
 }
 
 reviewsList.addEventListener('click',e=>{
