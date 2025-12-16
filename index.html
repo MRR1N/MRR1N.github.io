@@ -40,7 +40,24 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 @keyframes letterPop{0%{opacity:0;transform:scale(0);}100%{opacity:1;transform:scale(1);}}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 </style>
-</head>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDyhtt2puz5oAO-PKFTr4D1FwWVFs9_7e4",
+  authDomain: "mrr1n-reviews.firebaseapp.com",
+  databaseURL: "https://mrr1n-reviews-default-rtdb.firebaseio.com",
+  projectId: "mrr1n-reviews",
+  storageBucket: "mrr1n-reviews.firebasestorage.app",
+  messagingSenderId: "353253143876",
+  appId: "1:353253143876:web:acf7171dceb5a306955311"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+</script>
 <body>
 
 <div class="modal-bg" id="ageModal">
@@ -116,6 +133,7 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 </div>
 </div>
 </div>
+
 <div class="card" id="tos">
 <h2 class="tos-toggle" onclick="toggleTOS()">TOS</h2>
 <div class="tos-content" id="tos-content">
@@ -138,86 +156,26 @@ footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9
 
 <footer>© 2025 MR.R1N. All rights reserved.</footer>
 
-<script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js"></script>
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDyhtt2puz5oAO-PKFTr4D1FwWVFs9_7e4",
-  authDomain: "mrr1n-reviews.firebaseapp.com",
-  databaseURL: "https://mrr1n-reviews-default-rtdb.firebaseio.com",
-  projectId: "mrr1n-reviews",
-  storageBucket: "mrr1n-reviews.firebasestorage.app",
-  messagingSenderId: "353253143876",
-  appId: "1:353253143876:web:acf7171dceb5a306955311"
-};
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+<script type="module">
+import { ref, onValue, set, getDatabase } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
 
+const dbRef = ref(getDatabase(), 'reviews');
+const reviewsList = document.getElementById('existing-reviews');
 const ageModal = document.getElementById('ageModal');
 const modalText = document.getElementById('modalText');
 const adultYesBtn = document.getElementById('adult-yes');
 const adultNoBtn = document.getElementById('adult-no');
-if(localStorage.getItem('adultConfirmed')==='true') ageModal.style.display='none';
-adultYesBtn.addEventListener('click',()=>{localStorage.setItem('adultConfirmed','true');ageModal.style.display='none';});
-adultNoBtn.addEventListener('click',()=>{modalText.textContent='Refresh the page to try again';adultYesBtn.style.display='none';adultNoBtn.style.display='none';document.querySelector('#modalContent img').src='sprite2.png';});
 
-function switchLang(l){
-  const h=document.getElementById('header-desc'),p=document.getElementById('pricing-title'),r=document.getElementById('reviews-title');
-  const n=document.getElementById('nickname'),t=document.getElementById('review');
-  const b=document.querySelector('#review-write button'),tos=document.querySelector('.tos-toggle');
-  if(l==='ru'){
-    h.textContent='2D Фурри художник и аниматор';
-    p.textContent='Прайс-лист';
-    r.textContent='Отзывы';
-    n.placeholder='Никнейм';
-    t.placeholder='Ваш отзыв';
-    b.textContent='Отправить';
-    n.setCustomValidity('Заполните это поле');
-    t.setCustomValidity('Заполните это поле');
-    tos.textContent='Условия *нажмите, чтобы развернуть';
-    document.getElementById('pricing-content-en').style.display='none';
-    document.getElementById('pricing-content-ru').style.display='flex';
-    document.getElementById('pricing-content-es').style.display='none';
-  } else if(l==='es'){
-    h.textContent='Artista y Animador Furry 2D';
-    p.textContent='Precios';
-    r.textContent='Reseñas (haz clic para dejar la tuya)';
-    n.placeholder='Apodo';
-    t.placeholder='Tu reseña';
-    b.textContent='Enviar reseña';
-    n.setCustomValidity('Por favor, complete este campo');
-    t.setCustomValidity('Por favor, complete este campo');
-    tos.textContent='Términos de Servicio (clic para expandir)';
-    document.getElementById('pricing-content-en').style.display='none';
-    document.getElementById('pricing-content-ru').style.display='none';
-    document.getElementById('pricing-content-es').style.display='flex';
-  } else {
-    h.textContent='2D Furry Artist & Animator';
-    p.textContent='Pricing';
-    r.textContent='Reviews *click';
-    n.placeholder='Nickname';
-    t.placeholder='Your review';
-    b.textContent='Submit';
-    n.setCustomValidity('Please fill out this field');
-    t.setCustomValidity('Please fill out this field');
-    tos.textContent='TOS (Click to expand)';
-    document.getElementById('pricing-content-en').style.display='flex';
-    document.getElementById('pricing-content-ru').style.display='none';
-    document.getElementById('pricing-content-es').style.display='none';
-  }
-}
-document.getElementById('btn-en').addEventListener('click',()=>switchLang('en'));
-document.getElementById('btn-ru').addEventListener('click',()=>switchLang('ru'));
-document.getElementById('btn-es').addEventListener('click',()=>switchLang('es'));
+if(localStorage.getItem('adultConfirmed') === 'true') ageModal.style.display = 'none';
+adultYesBtn.addEventListener('click', () => { localStorage.setItem('adultConfirmed','true'); ageModal.style.display='none'; });
+adultNoBtn.addEventListener('click', () => { modalText.textContent='Refresh the page to try again'; adultYesBtn.style.display='none'; adultNoBtn.style.display='none'; document.querySelector('#modalContent img').src='sprite2.png'; });
 
-const reviewsList=document.getElementById('existing-reviews');
-
-function loadReviews(){
-  db.ref('reviews').on('value', snapshot => {
+function loadReviews() {
+  onValue(dbRef, snapshot => {
     const data = snapshot.val() || [];
     reviewsList.innerHTML = '';
     data.forEach((e,i)=>{
-      const d=document.createElement('div');
+      const d = document.createElement('div');
       d.className='review-item';
       if(sessionStorage.getItem('admin')==='true'){
         d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span> <button class='delete-btn' data-index='${i}'>✖</button>`;
@@ -233,35 +191,74 @@ function submitReview(e){
   e.preventDefault();
   const nickname = document.getElementById('nickname');
   const review = document.getElementById('review');
-  if(!nickname.value.trim()){nickname.setCustomValidity('Заполните это поле');nickname.reportValidity();return;} else nickname.setCustomValidity('');
-  if(!review.value.trim()){review.setCustomValidity('Заполните это поле');review.reportValidity();return;} else review.setCustomValidity('');
-  db.ref('reviews').once('value', snapshot => {
+  if(!nickname.value.trim()){nickname.setCustomValidity('Please fill out');nickname.reportValidity();return;} else nickname.setCustomValidity('');
+  if(!review.value.trim()){review.setCustomValidity('Please fill out');review.reportValidity();return;} else review.setCustomValidity('');
+
+  get(dbRef).then(snapshot=>{
     const data = snapshot.val() || [];
     data.push({nickname: nickname.value, text: review.value});
-    db.ref('reviews').set(data).then(()=>{nickname.value=''; review.value='';});
+    set(dbRef, data).then(()=>{nickname.value=''; review.value='';});
   });
 }
 
 reviewsList.addEventListener('click', e=>{
   if(e.target.classList.contains('delete-btn') && sessionStorage.getItem('admin')==='true'){
-    const index=e.target.dataset.index;
-    db.ref('reviews').once('value', snapshot=>{
+    const index = e.target.dataset.index;
+    get(dbRef).then(snapshot=>{
       const data = snapshot.val()||[];
       data.splice(index,1);
-      db.ref('reviews').set(data);
+      set(dbRef, data);
     });
   }
 });
 
 function toggleReviewForm(){
-  const r=document.getElementById('review-write');
-  r.style.maxHeight=r.style.maxHeight&&r.style.maxHeight!=='0px'?'0':r.scrollHeight+'px';
+  const r = document.getElementById('review-write');
+  r.style.maxHeight = r.style.maxHeight && r.style.maxHeight!=='0px' ? '0' : r.scrollHeight+'px';
 }
 
 function toggleTOS(){
-  const t=document.getElementById('tos-content');
-  t.style.maxHeight=t.style.maxHeight&&t.style.maxHeight!=='0px'?'0':t.scrollHeight+'px';
+  const t = document.getElementById('tos-content');
+  t.style.maxHeight = t.style.maxHeight && t.style.maxHeight!=='0px' ? '0' : t.scrollHeight+'px';
 }
+
+function switchLang(l){
+  const h=document.getElementById('header-desc'), p=document.getElementById('pricing-title'), r=document.getElementById('reviews-title');
+  const n=document.getElementById('nickname'), t=document.getElementById('review');
+  const b=document.querySelector('#review-write button'), tos=document.querySelector('.tos-toggle');
+  if(l==='ru'){
+    h.textContent='2D Фурри художник и аниматор';
+    p.textContent='Прайс-лист';
+    r.textContent='Отзывы';
+    n.placeholder='Никнейм'; t.placeholder='Ваш отзыв'; b.textContent='Отправить';
+    tos.textContent='Условия *нажмите, чтобы развернуть';
+    document.getElementById('pricing-content-en').style.display='none';
+    document.getElementById('pricing-content-ru').style.display='flex';
+    document.getElementById('pricing-content-es').style.display='none';
+  } else if(l==='es'){
+    h.textContent='Artista y Animador Furry 2D';
+    p.textContent='Precios';
+    r.textContent='Reseñas (haz clic para dejar la tuya)';
+    n.placeholder='Apodo'; t.placeholder='Tu reseña'; b.textContent='Enviar reseña';
+    tos.textContent='Términos de Servicio (clic para expandir)';
+    document.getElementById('pricing-content-en').style.display='none';
+    document.getElementById('pricing-content-ru').style.display='none';
+    document.getElementById('pricing-content-es').style.display='flex';
+  } else {
+    h.textContent='2D Furry Artist & Animator';
+    p.textContent='Pricing';
+    r.textContent='Reviews *click';
+    n.placeholder='Nickname'; t.placeholder='Your review'; b.textContent='Submit';
+    tos.textContent='TOS (Click to expand)';
+    document.getElementById('pricing-content-en').style.display='flex';
+    document.getElementById('pricing-content-ru').style.display='none';
+    document.getElementById('pricing-content-es').style.display='none';
+  }
+}
+
+document.getElementById('btn-en').addEventListener('click',()=>switchLang('en'));
+document.getElementById('btn-ru').addEventListener('click',()=>switchLang('ru'));
+document.getElementById('btn-es').addEventListener('click',()=>switchLang('es'));
 
 loadReviews();
 </script>
