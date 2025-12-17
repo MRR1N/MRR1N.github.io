@@ -6,261 +6,192 @@
 <title>MR.R1N - 2D Furry Artist & Animator</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@400;500&display=swap');
-:root{--bg-dark:#251717;--bg-mid:#5B2022;--accent:#EEC785;--text-light:#FCF3F0;--accent-hover:#fff;--shadow:rgba(0,0,0,0.85);}
-*{box-sizing:border-box;margin:0;padding:0;}body{font-family:'Roboto',sans-serif;background:var(--bg-dark);color:var(--text-light);overflow-x:hidden;cursor:url('https://i.ibb.co/2NPy5sP/pointer.png'),auto;}
-a{color:var(--accent);text-decoration:none;transition:.3s;}a:hover{color:var(--accent-hover);}
-header{text-align:center;padding:3rem 1rem;background:linear-gradient(135deg,#3a1d1f,#5B2022);box-shadow:0 0 50px var(--shadow);border-bottom:2px solid var(--accent);animation:fadeInDown 1s ease forwards;}header h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:.5rem;color:var(--accent);text-shadow:0 0 12px var(--accent);animation:letterPop .5s ease forwards;}header p{font-size:1.2rem;color:var(--text-light);text-shadow:0 0 6px #000;}
-nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;animation:fadeInUp 1s ease forwards;}nav a{font-weight:500;font-size:1rem;padding:.5rem 1rem;border-radius:8px;position:relative;transition:all .3s;}nav a::after{content:'';position:absolute;width:0;height:2px;bottom:0;left:0;background:var(--accent);transition:.3s;}nav a:hover::after{width:100%;}
-.lang-switch{text-align:center;margin:3rem 0 2rem 0;}.lang-switch button{margin:0 .5rem;padding:.5rem 1rem;border:none;border-radius:8px;cursor:pointer;background:var(--accent);color:var(--bg-dark);font-weight:bold;transition:.3s;box-shadow:0 0 12px var(--shadow);}.lang-switch button:hover{background:var(--accent-hover);color:var(--bg-dark);transform:scale(1.05);}
-section{max-width:900px;margin:0 auto 4rem auto;padding:0 1rem;}
-h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;color:var(--accent);border-bottom:2px solid var(--accent);display:inline-block;padding-bottom:.3rem;text-shadow:0 0 10px var(--accent);text-align:center;}
-p,li{line-height:1.6;margin-bottom:.8rem;}ul{list-style:none;padding-left:0;}li{margin-bottom:.5rem;}
-.card{background:var(--bg-mid);padding:2rem;border-radius:18px;margin-bottom:3rem;box-shadow:0 0 60px var(--shadow);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
-.card::before{content:'';position:absolute;width:100%;height:100%;background:radial-gradient(circle at top left,rgba(255,236,133,.08),transparent);top:0;left:0;pointer-events:none;}
-.card:hover{transform:translateY(-5px);box-shadow:0 0 90px var(--shadow);}
-.reviews{margin-top:2rem;}.reviews-toggle{cursor:pointer;color:var(--accent);font-weight:bold;font-size:1.5rem;transition:color .3s;}.reviews-toggle:hover{color:var(--accent-hover);}
-.review-form input,.review-form textarea{width:100%;padding:.6rem;margin-bottom:1rem;border-radius:8px;border:none;background:#2d1d1d;color:var(--text-light);}
-.review-form button{background:var(--accent);color:var(--bg-dark);border:none;padding:.6rem 1.2rem;cursor:pointer;font-weight:bold;border-radius:8px;transition:.3s;box-shadow:0 0 12px var(--shadow);}.review-form button:hover{background:var(--accent-hover);color:var(--bg-dark);transform:scale(1.05);}
-.review-item{border-bottom:1px solid var(--accent);padding:.5rem 0;display:flex;align-items:center;animation:fadeIn .5s ease forwards;position:relative;}
-.review-avatar{width:42px;height:42px;border-radius:50%;margin-right:.8rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--accent);color:var(--bg-dark);font-weight:bold;box-shadow:0 0 10px var(--accent);}
-.delete-btn{position:absolute;right:0;opacity:0;background:transparent;border:none;cursor:pointer;font-weight:bold;font-size:1.3rem;color:#ff5f5f;transition:all .3s;}.review-item:hover .delete-btn{opacity:1;transform:scale(1.3);color:#ff1a1a;}
-footer{text-align:center;padding:2rem 1rem;background:var(--bg-mid);font-size:.9rem;color:var(--text-light);box-shadow:0 -5px 30px var(--shadow);}
-.tos-content{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:.5rem;padding-left:.5rem;border-left:2px solid var(--accent);}
-.tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;transition:color .3s;display:inline-block;margin-bottom:.5rem;}.tos-toggle:hover{color:var(--accent-hover);}
-.review-write{max-height:0;overflow:hidden;transition:max-height .5s ease;margin-top:1rem;}
-.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);display:flex;justify-content:center;align-items:center;z-index:1000;}
-.modal{background:linear-gradient(145deg,#3a1d1f,#5B2022);padding:2rem;border-radius:20px;text-align:center;max-width:400px;box-shadow:0 0 60px var(--shadow);animation:fadeIn .8s ease forwards;transition:transform .3s;}.modal:hover{transform:scale(1.03);}
-.modal img{max-width:150px;margin-bottom:1rem;border-radius:50%;box-shadow:0 0 18px var(--accent);transition:transform .3s;}.modal img:hover{transform:scale(1.05);}
-.modal p{margin-bottom:1rem;font-weight:bold;font-size:1.2rem;color:var(--accent);}
-.modal button{margin:.5rem;padding:.6rem 1.2rem;border:none;border-radius:10px;cursor:pointer;font-weight:bold;background:var(--accent);color:var(--bg-dark);transition:.3s;box-shadow:0 0 15px var(--shadow);}.modal button:hover{background:var(--accent-hover);transform:scale(1.05);}
-.pricing-columns{display:flex;justify-content:space-between;gap:2rem;}
-.pricing-column{flex:1;text-align:center;}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes letterPop{0%{opacity:0;transform:scale(0);}100%{opacity:1;transform:scale(1);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+:root{--bg-dark:#151212;--bg-mid:#3b1d1f;--accent:#EEC785;--text-light:#FCF3F0;--accent-hover:#fff;--shadow:rgba(0,0,0,0.85);}*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Roboto',sans-serif;background:var(--bg-dark);color:var(--text-light);overflow-x:hidden;position:relative;}
+a{color:var(--accent);text-decoration:none;transition:.3s;}a:hover{color:var(--accent);}header{text-align:center;padding:3rem 1rem;background:linear-gradient(135deg,#2a1112,#3b1d1f);box-shadow:0 0 50px var(--shadow);border-bottom:2px solid var(--accent);position:relative;}header h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:.5rem;color:var(--accent);text-shadow:0 0 12px var(--accent);}header p{font-size:1.2rem;text-shadow:0 0 6px #000;}
+nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;}nav a{position:relative;padding:.3rem .2rem;font-weight:500;} nav a::after{content:'';position:absolute;left:50%;bottom:-4px;width:0;height:2px;background:var(--accent);transition:width .4s ease,left .4s ease;transform:translateX(-50%);} nav a:hover::after{width:100%;left:50%;}
+.header-lang{position:absolute;top:1.2rem;right:1.5rem;display:flex;gap:.6rem;}
+.header-lang button{padding:.45rem .8rem;border:none;border-radius:10px;cursor:pointer;background:var(--bg-mid);color:var(--accent);font-weight:bold;font-size:.8rem;transition:.35s;box-shadow:0 0 12px var(--shadow);} .header-lang button:hover{background:var(--accent);color:var(--bg-dark);} .lang-switch button:hover{background:var(--accent);color:var(--bg-dark);transform:scale(1.05);}section{max-width:900px;margin:0 auto 4rem;padding:0 1rem;}h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;color:var(--accent);display:inline-block;padding-bottom:.3rem;text-shadow:0 0 10px var(--accent);} h2.tos-toggle:hover{filter:brightness(1.15);transform:translateY(-2px);}p,li{line-height:1.6;margin-bottom:.6rem;}ul,ol{padding-left:1.2rem;}li{margin-bottom:.4rem;} .card{background:var(--bg-mid);padding:2rem;border-radius:18px;margin-bottom:3rem;box-shadow:0 0 60px var(--shadow);transition:transform .5s;} .card:hover{transform:translateY(-6px);} .pricing-columns{display:flex;gap:2rem;flex-wrap:wrap;} .pricing-column{flex:1;text-align:center; min-width:250px;} .example-preview{margin-bottom:1rem;border-radius:12px;overflow:hidden;box-shadow:0 0 25px var(--shadow);transition:transform .45s ease;} .example-preview img,.example-preview video{width:100%;border-radius:12px;} .example-preview:hover{transform:scale(1.025) rotate(-0.8deg);} .example-link{display:inline-block;margin-top:.5rem;padding:.45rem .9rem;background:linear-gradient(135deg,var(--accent),#e6b96d);color:var(--bg-dark);border-radius:10px;font-weight:bold;text-decoration:none;transition:transform .4s ease, box-shadow .4s ease;box-shadow:0 0 12px var(--shadow);} .example-link:hover{transform:scale(1.08) translateY(-2px) rotate(1deg);box-shadow:0 0 30px var(--shadow);color:var(--bg-dark);} .example-link:hover{transform:scale(1.08) translateY(-2px) rotate(1deg);box-shadow:0 0 30px var(--shadow);} 
+.trello-bubble{position:absolute;bottom:100%;left:50%;transform:translate(-50%,10px);padding:.3rem .8rem;border-radius:12px;background:transparent;color:var(--accent);border:1px solid var(--accent);font-size:.8rem;opacity:0;transition:opacity .3s ease, transform .3s ease;pointer-events:none;white-space:nowrap;} nav a.trello:hover .trello-bubble{opacity:1;transform:translate(-50%,-8px);} .tos-content{max-height:0;overflow:hidden;transition:.5s;opacity:0;border-left:2px solid var(--accent);padding-left:.5rem;} .tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;display:inline-block;margin-bottom:.5rem;position:relative;} .tos-toggle::after{content:'';position:absolute;left:50%;bottom:-4px;width:0;height:2px;background:var(--accent);transform:translateX(-50%);transition:width .4s ease;} .tos-toggle:hover::after{width:100%;} .tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;display:inline-block;margin-bottom:.5rem;} .animation-block{text-align:left;margin-top:1rem;} .animation-item{margin-bottom:1.2rem;} .animation-item-title{font-weight:bold;color:var(--accent);margin-bottom:.2rem;}.tos-columns{display:flex;gap:3rem;flex-wrap:wrap;} .tos-column{flex:1;min-width:250px;}
 </style>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDyhtt2puz5oAO-PKFTr4D1FwWVFs9_7e4",
-  authDomain: "mrr1n-reviews.firebaseapp.com",
-  databaseURL: "https://mrr1n-reviews-default-rtdb.firebaseio.com",
-  projectId: "mrr1n-reviews",
-  storageBucket: "mrr1n-reviews.firebasestorage.app",
-  messagingSenderId: "353253143876",
-  appId: "1:353253143876:web:acf7171dceb5a306955311"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-</script>
+</head>
 <body>
-
-<div class="modal-bg" id="ageModal">
-  <div class="modal" id="modalContent">
-    <img src="sprite1.png" alt="Character Sprite">
-    <p id="modalText">Are you adult enough, buddy?</p>
-    <button id="adult-yes">Yes, damn right!</button>
-    <button id="adult-no">No, I'm a little tail</button>
-  </div>
-</div>
-
 <header>
+<div class="header-lang">
+<button data-lang="en">EN</button><button data-lang="ru">RU</button><button data-lang="es">ES</button>
+</div>
 <h1>MR.R1N</h1>
-<p id="header-desc">2D Furry Artist & Animator</p>
+<p id="header-desc" data-en="2D Furry Artist & Animator" data-ru="2D Фурри Артист и Аниматор" data-es="Artista y Animador 2D Furry">2D Furry Artist & Animator</p>
 </header>
 
-<div class="lang-switch">
-<button id="btn-en">EN</button>
-<button id="btn-ru">RU</button>
-<button id="btn-es">ES</button>
-</div>
-
 <nav>
-<a href="https://www.furaffinity.net/user/mr.r1n" target="_blank">FA</a>
-<a href="https://x.com/MRR1N_artist" target="_blank">Twitter</a>
-<a href="https://t.me/MR_R1N" target="_blank">Telegram</a>
-<a href="https://trello.com/b/G2vxoD6J/current-queue-mrrin" target="_blank">Trello</a>
+<a href="#" data-en="FA" data-ru="FA" data-es="FA">FA</a>
+<a href="#" data-en="Twitter" data-ru="Twitter" data-es="Twitter">Twitter</a>
+<a href="#" data-en="Telegram" data-ru="Telegram" data-es="Telegram">Telegram</a>
+<a href="#" class="trello">Trello<span class="trello-bubble" data-en="Queue" data-ru="Очередь" data-es="Cola">Очередь</span></a>
 </nav>
-
 <section>
 <div class="card" id="pricing">
-<h2 id="pricing-title">Pricing</h2>
-<div id="pricing-content-en" class="pricing-columns">
+<h2 data-en="Pricing" data-ru="Цены" data-es="Precios">Pricing</h2>
+<div class="pricing-columns">
 <div class="pricing-column">
-<h3>Art & Comics</h3>
-<ul>
-<li>One character: $95</li>
-<li>Two characters: $160</li>
-<li>One page comic (5-6 frames): $300</li>
-</ul>
+<h3 data-en="Art & Comics" data-ru="Искусство & Комиксы" data-es="Arte & Comics">Art & Comics</h3>
+<div class="example-preview"><img src="example-art.png" alt="Art"></div>
+<a class="example-link" href="#" data-en="View All" data-ru="Смотреть всё" data-es="Ver Todo">View All</a>
+<div class="animation-block">
+<div class="animation-item"><div class="animation-item-title" data-en="One character" data-ru="Один персонаж" data-es="Un personaje">Один персонаж</div><div data-en="Full render, background — $95" data-ru="Полный рендер, фон — $95" data-es="Render completo, fondo — $95">Полный рендер, фон — <strong>$95</strong></div></div>
+<div class="animation-item"><div class="animation-item-title" data-en="Two characters" data-ru="Два персонажа" data-es="Dos personajes">Два персонажа</div><div data-en="Full render, background — $160" data-ru="Полный рендер, фон — $160" data-es="Render completo, fondo — $160">Полный рендер, фон — <strong>$160</strong></div></div>
+<div class="animation-item"><div class="animation-item-title" data-en="One-page comic" data-ru="Одностраничный комикс" data-es="Cómic de una página">Одностраничный комикс</div><div data-en="5 panels, full render, background — $300" data-ru="5 панелей, полный рендер, фон — $300" data-es="5 paneles, render completo, fondo — $300">5 панелей, полный рендер, фон — <strong>$300</strong></div></div>
+<div class="animation-item"><div data-en="Second comic page +100%" data-ru="Вторая страница комикса +100%" data-es="Segunda página del cómic +100%">Вторая страница комикса +100%</div></div>
+<div class="animation-item-title tos-toggle" onclick="toggleArtInfo()" style="margin-top:1rem;" data-en="More info" data-ru="Подробнее" data-es="Más información">Подробнее</div>
+<div class="tos-content" id="art-info">
+<div data-en="Additional character — +70%" data-ru="Дополнительный персонаж — +70%" data-es="Personaje adicional — +70%">Дополнительный персонаж — +70%</div>
+<div data-en="Complexity fee (difficult angle, detailed guro) — $40–$80" data-ru="Доплата за сложность (сложный ракурс, детальное гуро) — $40–$80" data-es="Tarifa por complejidad (ángulo difícil, guro detallado) — $40–$80">Доплата за сложность (сложный ракурс, детальное гуро) — $40–$80</div>
+<div data-en="Additional panel (close-up, x-ray/inside view) — $55" data-ru="Дополнительная панель (крупный план, иксрей/вид внутри) — $55" data-es="Panel adicional (primer plano, rayos X/vista interior) — $55">Дополнительная панель (крупный план, иксрей/вид внутри) — $55</div>
+<div data-en="Alt version (orgasm, different emotion, secretions) — $30" data-ru="Альт версия (оргазм, другая эмоция, выделения) — $30" data-es="Versión alternativa (orgasmo, emoción diferente, secreciones) — $30">Альт версия (оргазм, другая эмоция, выделения) — $30</div>
 </div>
-<div class="pricing-column">
-<h3>Animation</h3>
-<p>Pricing varies; contact for details.</p>
 </div>
-</div>
-<div id="pricing-content-ru" class="pricing-columns" style="display:none;">
-<div class="pricing-column">
-<h3>Арт и Комиксы</h3>
-<ul>
-<li>Один персонаж: $95</li>
-<li>Два персонажа: $160</li>
-<li>Комикс на одну страницу (5-6 кадров): $300</li>
-</ul>
 </div>
 <div class="pricing-column">
-<h3>Анимация</h3>
-<p>Цены уточняйте, включая доплаты.</p>
+<h3 data-en="Animation" data-ru="Анимация" data-es="Animación">Animation</h3>
+<div class="example-preview"><video autoplay loop muted playsinline><source src="example-animation.webm" type="video/webm"></video></div>
+<a class="example-link" href="#" data-en="View All" data-ru="Смотреть всё" data-es="Ver Todo">View All</a>
+<div class="animation-block">
+<div class="animation-item">
+<div class="animation-item-title" data-en="Two characters" data-ru="Два персонажа" data-es="Dos personajes">Два персонажа</div>
+<div data-en="12 frames, full color and highlights, simple background, + orgasm — $1000" data-ru="12 кадров, полный цвет и блики, простой фон, + оргазм — 1000 долларов США" data-es="12 fotogramas, color completo y reflejos, fondo simple, + orgasmo — 1000 dólares estadounidenses">12 кадров, полный цвет и блики, простой фон, + оргазм — <strong>1000 долларов США</strong></div>
+</div>
+<div class="animation-item">
+<div class="animation-item-title" data-en="One character" data-ru="Один персонаж" data-es="Un personaje">Один персонаж</div>
+<div data-en="12 frames, full color and highlights, simple background — $650" data-ru="12 кадров, полный цвет и блики, простой фон — 650 долларов США" data-es="12 fotogramas, color completo y reflejos, fondo simple — 650 dólares estadounidenses">12 кадров, полный цвет и блики, простой фон — <strong>650 долларов США</strong></div>
+</div>
+<div class="animation-item">
+<div class="animation-item-title" data-en="Sketch with two characters" data-ru="Скетчевая с двумя персонажами" data-es="Boceto con dos personajes">Скетчевая с двумя персонажами</div>
+<div data-en="10 frames, black & white color, no background — $380" data-ru="10 кадров, чб цвет, без фона — 380 долларов США" data-es="10 fotogramas, color blanco y negro, sin fondo — 380 dólares estadounidenses">10 кадров, чб цвет, без фона — <strong>380 долларов США</strong></div>
+</div>
+<h4 class="tos-toggle" onclick="toggleInfo()" data-en="More info" data-ru="Подробнее" data-es="Más información">Подробнее</h4>
+<div class="tos-content" id="anim-info">
+<p data-en="I do not charge extra for character complexity." data-ru="Я не беру доплату за сложность персонажа." data-es="No cobro extra por la complejidad del personaje."><strong>Я не беру доплату за сложность персонажа.</strong> <span data-en="Small details — spots, patterns, etc. — are simplified and reduced, and wings are folded or hidden." data-ru="Мелкие детали — пятна, узоры и прочее — упрощаются и урезаются, а крылья сложены или скрыты." data-es="Los detalles pequeños (manchas, patrones, etc.) se simplifican y reducen, y las alas se pliegan o esconden.">Мелкие детали — пятна, узоры и прочее — упрощаются и урезаются, а крылья сложены или скрыты.</span></p>
+<p data-en="Each animation is looped." data-ru="Каждая анимация зациклена." data-es="Cada animación está en bucle."><strong>Каждая анимация зациклена.</strong></p>
+<p data-en="There are no shadows, but if it really improves the appearance somewhere, I can add a small hard shadow." data-ru="Теней нет, но если где-то это реально улучшит внешний вид, я могу добавить маленькую жесткую тень." data-es="No hay sombras, pero si realmente mejora la apariencia en algún lugar, puedo agregar una pequeña sombra dura.">Теней нет, но если где-то это реально улучшит внешний вид, я могу добавить маленькую жесткую тень.</p>
+<p data-en="Compositing is applied: blur, haze, etc. depending on atmosphere and idea." data-ru="Проходит композинг: размытие, дымка и т.д. в зависимости от атмосферы и идеи." data-es="Se aplica composición: desenfoque, neblina, etc. dependiendo de la atmósfera e idea.">Проходит композинг: размытие, дымка и т.д. в зависимости от атмосферы и идеи.</p>
+<p data-en="Included in the price: breathing, tears, salivation and lube on request." data-ru="В стоимость включено: дыхание, слезы, слюноотделение и смазка по желанию." data-es="Incluido en el precio: respiración, lágrimas, salivación y lubricante a pedido."><strong>В стоимость включено:</strong> дыхание, слезы, слюноотделение и смазка по желанию.</p>
+<p data-en="Final files are provided in WEBM, GIF and video format, in full resolution." data-ru="Итоговые файлы предоставляются в WEBM, GIF и видеоформате, в полном разрешении." data-es="Los archivos finales se proporcionan en formato WEBM, GIF y video, en resolución completa.">Итоговые файлы предоставляются в <strong>WEBM, GIF и видеоформате</strong>, в полном разрешении.</p>
+<p data-en="Work stages:" data-ru="Этапы работы:" data-es="Etapas del trabajo:"><strong>Этапы работы:</strong></p>
+<ol>
+<li data-en="First frame sketch — coordination of poses, ideas and characters." data-ru="Скетч первого кадра — согласование поз, идей и персонажей." data-es="Boceto del primer fotograma — coordinación de poses, ideas y personajes.">Скетч первого кадра — согласование поз, идей и персонажей.</li>
+<li data-en="Rough animatic — visualization of movement." data-ru="Грубый аниматик — визуализация движения." data-es="Animático aproximado — visualización del movimiento.">Грубый аниматик — визуализация движения.</li>
+<li data-en="Cleaned animatic — preparation for final coloring." data-ru="Очищенный аниматик — подготовка к финальной покраске." data-es="Animático limpio — preparación para el coloreado final.">Очищенный аниматик — подготовка к финальной покраске.</li>
+<li data-en="Fully colored one frame — approval of color palette." data-ru="Полностью раскрашенный один кадр — утверждение цветовой палитры." data-es="Un fotograma completamente coloreado — aprobación de la paleta de colores.">Полностью раскрашенный один кадр — утверждение цветовой палитры.</li>
+<li data-en="Final animation." data-ru="Финальная анимация." data-es="Animación final.">Финальная анимация.</li>
+</ol>
+<p data-en="Edits are possible only at stages 1, 2 and 4." data-ru="Правки возможны только на этапах 1, 2 и 4." data-es="Las ediciones son posibles solo en las etapas 1, 2 y 4."><u>Правки возможны только на этапах 1, 2 и 4.</u></p>
 </div>
 </div>
-<div id="pricing-content-es" class="pricing-columns" style="display:none;">
-<div class="pricing-column">
-<h3>Arte y Cómics</h3>
-<ul>
-<li>Un personaje: $95</li>
-<li>Dos personajes: $160</li>
-<li>Cómic de una página (5-6 cuadros): $300</li>
-</ul>
-</div>
-<div class="pricing-column">
-<h3>Animación</h3>
-<p>Los precios varían; contactar para detalles.</p>
 </div>
 </div>
-</div>
-
-<div class="card" id="tos">
-<h2 class="tos-toggle" onclick="toggleTOS()">TOS</h2>
+<div class="card" id="tos" style="margin-top:2rem;">
+<h2 class="tos-toggle" onclick="toggleTOS()" data-en="TOS" data-ru="Правила" data-es="TOS">TOS</h2>
 <div class="tos-content" id="tos-content">
-<p>Here will be your Terms of Service content. Expand to read fully.</p>
+<h3>1. Что я люблю / не рисую</h3>
+<div class="tos-columns">
+<div class="tos-column">
+<h4><strong>ЛЮБЛЮ ЭТО!</strong></h4>
+<ul>
+<li>Воре</li>
+<li>Минет</li>
+<li>Удушение</li>
+<li>Римминг</li>
+<li>Унижение</li>
+<li>Пальцы во рту</li>
+<li>Сквирт/писсинг</li>
+<li>Игра с сосками</li>
+<li>Лошадиные члены</li>
+<li>Разница в размере/возрасте</li>
+<li>Лапы, игры с лапами</li>
+<li>Принуждение/шантаж</li>
+<li>Двойное проникновение</li>
+<li>Игры с уретрой (саундинг)</li>
+<li>Кровь (укусы/синяки/царапины)</li>
+<li>БДСМ, мазохизм/садизм и доминирование</li>
+<li>Фембои/Переодевание в женскую одежду</li>
+<li>Проникновение в горло (глубокий минет)</li>
+<li>Проникновение в соски (легкое / среднее)</li>
+</ul>
+</div>
+<div class="tos-column">
+<h4><strong>НЕТ, ищи другого художника!</strong></h4>
+<ul>
+<li>Лактация</li>
+<li>Надувание</li>
+<li>Памперсы</li>
+<li>Рост мышц</li>
+<li>Гипержир/Гипермышцы</li>
+<li>Персонажи с ожирением</li>
+<li>Трансформация (любая)</li>
+<li>Гипер члены, сиськи и прочее</li>
+<li>Человеческие ноги/Грязные ноги</li>
+<li>Беременность/альт беременность</li>
+<li>Люди, гуманоидные, животные/ферал</li>
+<li>Очень перекаченные /сильно накаченные персонажи</li>
+</ul>
 </div>
 </div>
-
-<div class="card reviews">
-<h2 class="reviews-toggle" id="reviews-title" onclick="toggleReviewForm()">Reviews</h2>
-<div id="existing-reviews"></div>
-<div class="review-write" id="review-write">
-<form class="review-form" onsubmit="submitReview(event)">
-<input type="text" placeholder="Nickname (English, max 37 chars)" maxlength="37" id="nickname" required>
-<textarea placeholder="Your review" rows="3" id="review" required></textarea>
-<button type="submit">Submit Review</button>
-</form>
+<h3>2. РЕФЕРЕНС</h3>
+<p>Описания персонажей в текстовом виде не принимаются, исключением является небольшой редизайн Вашего пушистого, и если Ваш референс является скриншотом 3д модели персонажа - Вы должны предоставить готовую палитру цветов, в ином случае я самостоятельно их подберу и не гарантирую их точность.</p>
+<h3>3. ОПЛАТА</h3>
+<p>Оплата на Paypal, если Вы из СНГ - метод оплаты договорный. Заказ оплачивается полностью только после утвержденного скетча, я добавляю Вас в очередь на Trello. Вся сумма, доплаты или скидки указываются при расчете стоимости на стадии Наброска, все прозрачно. Если Вы заказываете с кем-то, позаботьтесь о том чтобы оплата была произведена строго одним счетом. Вы можете отказаться от заказа на стадии Скетча, возврат после оплаты невозможен.</p>
+<p><strong>Платежные планы доступны для заказов от суммы $300 и выше:</strong></p>
+<h4>50/50</h4>
+<ul><li>50% после скетча</li><li>50% перед финалом</li></ul>
+<h4>3 платежа</h4>
+<ul><li>30% после скетча</li><li>30% после лайна</li><li>40% перед финалом</li></ul>
+<p><strong>Сроки:</strong> при несвоевременной оплате я имею право отложить Ваш заказ в очереди Trello на какое-то время, а Вы лишаетесь возможности пользоваться планом оплаты в будущем.</p>
+<h3>4. ИСПОЛЬЗОВАНИЕ РАБОТЫ</h3>
+<p>Публикуйте свой заказ на любых площадках, я буду этому рад! Запрещено стирать, закрашивать, обрезать подпись и опубликовывать арт где-либо без подписи. Исключением является обрезка арта для аватара. Любое коммерческое использование запрещено без моего ведома и согласия. Исключением является продажа Вашего персонажа - Вы спокойно можете поднять цену своего адопта, если заказывали арт с ним. Запрещено дорисовывать, перерисовывать, доделывать скетч, лайн или любую другую стадию заказа который я Вам отправлял в процессе работы или готовую работу, или передавать что-то из этого другому художнику. Я имею право использовать Ваш заказ в портфолио, обрезать, изменять и использовать в своем портфолио и рекламе. Отклоненные скетчи могут использоваться мной в будущем, без использования и участия Ваших персонажей.</p>
+<p><strong>Начиная работать со мной, Вы полностью соглашаетесь с Условиями.</strong></p>
 </div>
 </div>
 </section>
-
 <footer>© 2025 MR.R1N. All rights reserved.</footer>
+<script>
+function toggleTOS(){const t=document.getElementById('tos-content');t.style.maxHeight=t.style.maxHeight?'':'2000px';t.style.opacity=t.style.opacity==='1'?'0':'1';}
+function toggleInfo(){const t=document.getElementById('anim-info');t.style.maxHeight=t.style.maxHeight?'':'1200px';t.style.opacity=t.style.opacity==='1'?'0':'1';}
+function toggleArtInfo(){const t=document.getElementById('art-info');t.style.maxHeight=t.style.maxHeight?'':'800px';t.style.opacity=t.style.opacity==='1'?'0':'1';}
 
-<script type="module">
-import { ref, onValue, set, getDatabase } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
-
-const dbRef = ref(getDatabase(), 'reviews');
-const reviewsList = document.getElementById('existing-reviews');
-const ageModal = document.getElementById('ageModal');
-const modalText = document.getElementById('modalText');
-const adultYesBtn = document.getElementById('adult-yes');
-const adultNoBtn = document.getElementById('adult-no');
-
-if(localStorage.getItem('adultConfirmed') === 'true') ageModal.style.display = 'none';
-adultYesBtn.addEventListener('click', () => { localStorage.setItem('adultConfirmed','true'); ageModal.style.display='none'; });
-adultNoBtn.addEventListener('click', () => { modalText.textContent='Refresh the page to try again'; adultYesBtn.style.display='none'; adultNoBtn.style.display='none'; document.querySelector('#modalContent img').src='sprite2.png'; });
-
-function loadReviews() {
-  onValue(dbRef, snapshot => {
-    const data = snapshot.val() || [];
-    reviewsList.innerHTML = '';
-    data.forEach((e,i)=>{
-      const d = document.createElement('div');
-      d.className='review-item';
-      if(sessionStorage.getItem('admin')==='true'){
-        d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span> <button class='delete-btn' data-index='${i}'>✖</button>`;
-      } else {
-        d.innerHTML=`<div class='review-avatar'>🐾</div><strong>${e.nickname}:</strong> <span>${e.text}</span>`;
-      }
-      reviewsList.appendChild(d);
+// Функция перевода
+document.addEventListener('DOMContentLoaded', function() {
+    const langButtons = document.querySelectorAll('.header-lang button');
+    
+    langButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            
+            // Обновляем все элементы с data-атрибутами
+            document.querySelectorAll('[data-en]').forEach(element => {
+                if (element.getAttribute(`data-${lang}`)) {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                }
+            });
+            
+            // Обновляем текст в span внутри .trello-bubble
+            const bubble = document.querySelector('.trello-bubble');
+            if (bubble && bubble.getAttribute(`data-${lang}`)) {
+                bubble.textContent = bubble.getAttribute(`data-${lang}`);
+            }
+            
+            // Обновляем заголовок страницы
+            const titleMap = {
+                'en': 'MR.R1N - 2D Furry Artist & Animator',
+                'ru': 'MR.R1N - 2D Фурри Артист и Аниматор',
+                'es': 'MR.R1N - Artista y Animador 2D Furry'
+            };
+            if (titleMap[lang]) {
+                document.title = titleMap[lang];
+            }
+        });
     });
-  });
-}
-
-function submitReview(e){
-  e.preventDefault();
-  const nickname = document.getElementById('nickname');
-  const review = document.getElementById('review');
-  if(!nickname.value.trim()){nickname.setCustomValidity('Please fill out');nickname.reportValidity();return;} else nickname.setCustomValidity('');
-  if(!review.value.trim()){review.setCustomValidity('Please fill out');review.reportValidity();return;} else review.setCustomValidity('');
-
-  get(dbRef).then(snapshot=>{
-    const data = snapshot.val() || [];
-    data.push({nickname: nickname.value, text: review.value});
-    set(dbRef, data).then(()=>{nickname.value=''; review.value='';});
-  });
-}
-
-reviewsList.addEventListener('click', e=>{
-  if(e.target.classList.contains('delete-btn') && sessionStorage.getItem('admin')==='true'){
-    const index = e.target.dataset.index;
-    get(dbRef).then(snapshot=>{
-      const data = snapshot.val()||[];
-      data.splice(index,1);
-      set(dbRef, data);
-    });
-  }
 });
-
-function toggleReviewForm(){
-  const r = document.getElementById('review-write');
-  r.style.maxHeight = r.style.maxHeight && r.style.maxHeight!=='0px' ? '0' : r.scrollHeight+'px';
-}
-
-function toggleTOS(){
-  const t = document.getElementById('tos-content');
-  t.style.maxHeight = t.style.maxHeight && t.style.maxHeight!=='0px' ? '0' : t.scrollHeight+'px';
-}
-
-function switchLang(l){
-  const h=document.getElementById('header-desc'), p=document.getElementById('pricing-title'), r=document.getElementById('reviews-title');
-  const n=document.getElementById('nickname'), t=document.getElementById('review');
-  const b=document.querySelector('#review-write button'), tos=document.querySelector('.tos-toggle');
-  if(l==='ru'){
-    h.textContent='2D Фурри художник и аниматор';
-    p.textContent='Прайс-лист';
-    r.textContent='Отзывы';
-    n.placeholder='Никнейм'; t.placeholder='Ваш отзыв'; b.textContent='Отправить';
-    tos.textContent='Условия *нажмите, чтобы развернуть';
-    document.getElementById('pricing-content-en').style.display='none';
-    document.getElementById('pricing-content-ru').style.display='flex';
-    document.getElementById('pricing-content-es').style.display='none';
-  } else if(l==='es'){
-    h.textContent='Artista y Animador Furry 2D';
-    p.textContent='Precios';
-    r.textContent='Reseñas (haz clic para dejar la tuya)';
-    n.placeholder='Apodo'; t.placeholder='Tu reseña'; b.textContent='Enviar reseña';
-    tos.textContent='Términos de Servicio (clic para expandir)';
-    document.getElementById('pricing-content-en').style.display='none';
-    document.getElementById('pricing-content-ru').style.display='none';
-    document.getElementById('pricing-content-es').style.display='flex';
-  } else {
-    h.textContent='2D Furry Artist & Animator';
-    p.textContent='Pricing';
-    r.textContent='Reviews *click';
-    n.placeholder='Nickname'; t.placeholder='Your review'; b.textContent='Submit';
-    tos.textContent='TOS (Click to expand)';
-    document.getElementById('pricing-content-en').style.display='flex';
-    document.getElementById('pricing-content-ru').style.display='none';
-    document.getElementById('pricing-content-es').style.display='none';
-  }
-}
-
-document.getElementById('btn-en').addEventListener('click',()=>switchLang('en'));
-document.getElementById('btn-ru').addEventListener('click',()=>switchLang('ru'));
-document.getElementById('btn-es').addEventListener('click',()=>switchLang('es'));
-
-loadReviews();
 </script>
 </body>
 </html>
