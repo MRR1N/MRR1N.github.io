@@ -6,6 +6,7 @@
 <title>MR.R1N - 2D Furry Artist & Animator</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@400;500&display=swap');
+
 :root{--bg-dark:#151212;--bg-mid:#3b1d1f;--accent:#EEC785;--text-light:#FCF3F0;--accent-hover:#fff;--shadow:rgba(0,0,0,0.85);}*{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Roboto',sans-serif;background:var(--bg-dark);color:var(--text-light);overflow-x:hidden;position:relative;}
 a{color:var(--accent);text-decoration:none;transition:.3s;}a:hover{color:var(--accent);}header{text-align:center;padding:3rem 1rem;background:linear-gradient(135deg,#2a1112,#3b1d1f);box-shadow:0 0 50px var(--shadow);border-bottom:2px solid var(--accent);position:relative;}header h1{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:.5rem;color:var(--accent);text-shadow:0 0 12px var(--accent);}header p{font-size:1.2rem;text-shadow:0 0 6px #000;}
@@ -13,6 +14,86 @@ nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;}nav a{position:r
 .header-lang{position:absolute;top:1.2rem;right:1.5rem;display:flex;gap:.6rem;}
 .header-lang button{padding:.45rem .8rem;border:none;border-radius:10px;cursor:pointer;background:var(--bg-mid);color:var(--accent);font-weight:bold;font-size:.8rem;transition:.35s;box-shadow:0 0 12px var(--shadow);} .header-lang button:hover{background:var(--accent);color:var(--bg-dark);} .lang-switch button:hover{background:var(--accent);color:var(--bg-dark);transform:scale(1.05);}section{max-width:900px;margin:0 auto 4rem;padding:0 1rem;}h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:1rem;color:var(--accent);display:inline-block;padding-bottom:.3rem;text-shadow:0 0 10px var(--accent);} h2.tos-toggle:hover{filter:brightness(1.15);transform:translateY(-2px);}p,li{line-height:1.6;margin-bottom:.6rem;}ul,ol{padding-left:1.2rem;}li{margin-bottom:.4rem;} .card{background:var(--bg-mid);padding:2rem;border-radius:18px;margin-bottom:3rem;box-shadow:0 0 60px var(--shadow);transition:transform .5s;} .card:hover{transform:translateY(-6px);} .pricing-columns{display:flex;gap:2rem;flex-wrap:wrap;} .pricing-column{flex:1;text-align:center; min-width:250px;} .example-preview{margin-bottom:1rem;border-radius:12px;overflow:hidden;box-shadow:0 0 25px var(--shadow);transition:transform .45s ease;} .example-preview img,.example-preview video{width:100%;border-radius:12px;} .example-preview:hover{transform:scale(1.025) rotate(-0.8deg);} .example-link{display:inline-block;margin-top:.5rem;padding:.45rem .9rem;background:linear-gradient(135deg,var(--accent),#e6b96d);color:var(--bg-dark);border-radius:10px;font-weight:bold;text-decoration:none;transition:transform .4s ease, box-shadow .4s ease;box-shadow:0 0 12px var(--shadow);} .example-link:hover{transform:scale(1.08) translateY(-2px) rotate(1deg);box-shadow:0 0 30px var(--shadow);color:var(--bg-dark);} .example-link:hover{transform:scale(1.08) translateY(-2px) rotate(1deg);box-shadow:0 0 30px var(--shadow);} 
 .trello-bubble{position:absolute;bottom:100%;left:50%;transform:translate(-50%,10px);padding:.3rem .8rem;border-radius:12px;background:transparent;color:var(--accent);border:1px solid var(--accent);font-size:.8rem;opacity:0;transition:opacity .3s ease, transform .3s ease;pointer-events:none;white-space:nowrap;} nav a.trello:hover .trello-bubble{opacity:1;transform:translate(-50%,-8px);} .tos-content{max-height:0;overflow:hidden;transition:.5s;opacity:0;border-left:2px solid var(--accent);padding-left:.5rem;} .tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;display:inline-block;margin-bottom:.5rem;position:relative;} .tos-toggle::after{content:'';position:absolute;left:50%;bottom:-4px;width:0;height:2px;background:var(--accent);transform:translateX(-50%);transition:width .4s ease;} .tos-toggle:hover::after{width:100%;} .tos-toggle{cursor:pointer;color:var(--accent);font-weight:bold;display:inline-block;margin-bottom:.5rem;} .animation-block{text-align:left;margin-top:1rem;} .animation-item{margin-bottom:1.2rem;} .animation-item-title{font-weight:bold;color:var(--accent);margin-bottom:.2rem;}.tos-columns{display:flex;gap:3rem;flex-wrap:wrap;} .tos-column{flex:1;min-width:250px;}
+
+/* Стили для кнопки прокрутки вверх */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--accent), #e6b96d);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: none;
+    overflow: hidden;
+}
+
+.scroll-to-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #e6b96d, var(--accent));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(238, 199, 133, 0.4);
+}
+
+.scroll-to-top:hover::before {
+    opacity: 1;
+}
+
+.scroll-to-top:active {
+    transform: translateY(0) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--bg-dark);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.scroll-to-top:hover svg {
+    transform: translateY(-2px);
+}
+
+/* Анимация легкой пульсации при первом появлении */
+@keyframes gentle-pulse {
+    0% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+    50% { box-shadow: 0 6px 25px rgba(238, 199, 133, 0.5); }
+    100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+}
+
+.scroll-to-top.pulse {
+    animation: gentle-pulse 2s ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -28,7 +109,7 @@ nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;}nav a{position:r
 <a href="#" data-en="FA" data-ru="FA" data-es="FA">FA</a>
 <a href="#" data-en="Twitter" data-ru="Twitter" data-es="Twitter">Twitter</a>
 <a href="#" data-en="Telegram" data-ru="Telegram" data-es="Telegram">Telegram</a>
-<a href="#" class="trello">Trello<span class="trello-bubble" data-en="Queue" data-ru="Очередь" data-es="Cola">Очередь</span></a>
+<a href="#" class="trello">Trello<span class="trello-bubble" data-en="Queue" data-ru="Очередь" data-es="Cola">Queue</span></a>
 </nav>
 <section>
 <div class="card" id="pricing">
@@ -39,16 +120,16 @@ nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;}nav a{position:r
 <div class="example-preview"><img src="example-art.png" alt="Art"></div>
 <a class="example-link" href="#" data-en="View All" data-ru="Смотреть всё" data-es="Ver Todo">View All</a>
 <div class="animation-block">
-<div class="animation-item"><div class="animation-item-title" data-en="One character" data-ru="Один персонаж" data-es="Un personaje">Один персонаж</div><div data-en="Full render, background — $95" data-ru="Полный рендер, фон — $95" data-es="Render completo, fondo — $95">Полный рендер, фон — <strong>$95</strong></div></div>
-<div class="animation-item"><div class="animation-item-title" data-en="Two characters" data-ru="Два персонажа" data-es="Dos personajes">Два персонажа</div><div data-en="Full render, background — $160" data-ru="Полный рендер, фон — $160" data-es="Render completo, fondo — $160">Полный рендер, фон — <strong>$160</strong></div></div>
-<div class="animation-item"><div class="animation-item-title" data-en="One-page comic" data-ru="Одностраничный комикс" data-es="Cómic de una página">Одностраничный комикс</div><div data-en="5 panels, full render, background — $300" data-ru="5 панелей, полный рендер, фон — $300" data-es="5 paneles, render completo, fondo — $300">5 панелей, полный рендер, фон — <strong>$300</strong></div></div>
-<div class="animation-item"><div data-en="Second comic page +100%" data-ru="Вторая страница комикса +100%" data-es="Segunda página del cómic +100%">Вторая страница комикса +100%</div></div>
-<div class="animation-item-title tos-toggle" onclick="toggleArtInfo()" style="margin-top:1rem;" data-en="More info" data-ru="Подробнее" data-es="Más información">Подробнее</div>
+<div class="animation-item"><div class="animation-item-title" data-en="One character" data-ru="Один персонаж" data-es="Un personaje">One character</div><div data-en="Full render, background — $95" data-ru="Полный рендер, фон — $95" data-es="Render completo, fondo — $95">Full render, background — <strong>$95</strong></div></div>
+<div class="animation-item"><div class="animation-item-title" data-en="Two characters" data-ru="Два персонажа" data-es="Dos personajes">Two characters</div><div data-en="Full render, background — $160" data-ru="Полный рендер, фон — $160" data-es="Render completo, fondo — $160">Full render, background — <strong>$160</strong></div></div>
+<div class="animation-item"><div class="animation-item-title" data-en="One-page comic" data-ru="Одностраничный комикс" data-es="Cómic de una página">One-page comic</div><div data-en="5 panels, full render, background — $300" data-ru="5 панелей, полный рендер, фон — $300" data-es="5 paneles, render completo, fondo — $300">5 panels, full render, background — <strong>$300</strong></div></div>
+<div class="animation-item"><div data-en="Second comic page +100%" data-ru="Вторая страница комикса +100%" data-es="Segunda página del cómic +100%">Second comic page +100%</div></div>
+<div class="animation-item-title tos-toggle" onclick="toggleArtInfo()" style="margin-top:1rem;" data-en="More info" data-ru="Подробнее" data-es="Más información">More info</div>
 <div class="tos-content" id="art-info">
-<div data-en="Additional character — +70%" data-ru="Дополнительный персонаж — +70%" data-es="Personaje adicional — +70%">Дополнительный персонаж — +70%</div>
-<div data-en="Complexity fee (difficult angle, detailed guro) — $40–$80" data-ru="Доплата за сложность (сложный ракурс, детальное гуро) — $40–$80" data-es="Tarifa por complejidad (ángulo difícil, guro detallado) — $40–$80">Доплата за сложность (сложный ракурс, детальное гуро) — $40–$80</div>
-<div data-en="Additional panel (close-up, x-ray/inside view) — $55" data-ru="Дополнительная панель (крупный план, иксрей/вид внутри) — $55" data-es="Panel adicional (primer plano, rayos X/vista interior) — $55">Дополнительная панель (крупный план, иксрей/вид внутри) — $55</div>
-<div data-en="Alt version (orgasm, different emotion, secretions) — $30" data-ru="Альт версия (оргазм, другая эмоция, выделения) — $30" data-es="Versión alternativa (orgasmo, emoción diferente, secreciones) — $30">Альт версия (оргазм, другая эмоция, выделения) — $30</div>
+<div data-en="Additional character — +70%" data-ru="Дополнительный персонаж — +70%" data-es="Personaje adicional — +70%">Additional character — +70%</div>
+<div data-en="Complexity fee (difficult angle, detailed guro) — $40–$80" data-ru="Доплата за сложность (сложный ракурс, детальное гуро) — $40–$80" data-es="Tarifa por complejidad (ángulo difícil, guro detallado) — $40–$80">Complexity fee (difficult angle, detailed guro) — $40–$80</div>
+<div data-en="Additional panel (close-up, x-ray/inside view) — $55" data-ru="Дополнительная панель (крупный план, иксрей/вид внутри) — $55" data-es="Panel adicional (primer plano, rayos X/vista interior) — $55">Additional panel (close-up, x-ray/inside view) — $55</div>
+<div data-en="Alt version (orgasm, different emotion, secretions) — $30" data-ru="Альт версия (оргазм, другая эмоция, выделения) — $30" data-es="Versión alternativa (orgasmo, emoción diferente, secreciones) — $30">Alt version (orgasm, different emotion, secretions) — $30</div>
 </div>
 </div>
 </div>
@@ -58,34 +139,34 @@ nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;}nav a{position:r
 <a class="example-link" href="#" data-en="View All" data-ru="Смотреть всё" data-es="Ver Todo">View All</a>
 <div class="animation-block">
 <div class="animation-item">
-<div class="animation-item-title" data-en="Two characters" data-ru="Два персонажа" data-es="Dos personajes">Два персонажа</div>
-<div data-en="12 frames, full color and highlights, simple background, + orgasm — $1000" data-ru="12 кадров, полный цвет и блики, простой фон, + оргазм — 1000 долларов США" data-es="12 fotogramas, color completo y reflejos, fondo simple, + orgasmo — 1000 dólares estadounidenses">12 кадров, полный цвет и блики, простой фон, + оргазм — <strong>1000 долларов США</strong></div>
+<div class="animation-item-title" data-en="Two characters" data-ru="Два персонажа" data-es="Dos personajes">Two characters</div>
+<div data-en="12 frames, full color and highlights, simple background, + orgasm — $1000" data-ru="12 кадров, полный цвет и блики, простой фон, + оргазм — 1000 долларов США" data-es="12 fotogramas, color completo y reflejos, fondo simple, + orgasmo — 1000 dólares estadounidenses">12 frames, full color and highlights, simple background, + orgasm — <strong>$1000</strong></div>
 </div>
 <div class="animation-item">
-<div class="animation-item-title" data-en="One character" data-ru="Один персонаж" data-es="Un personaje">Один персонаж</div>
-<div data-en="12 frames, full color and highlights, simple background — $650" data-ru="12 кадров, полный цвет и блики, простой фон — 650 долларов США" data-es="12 fotogramas, color completo y reflejos, fondo simple — 650 dólares estadounidenses">12 кадров, полный цвет и блики, простой фон — <strong>650 долларов США</strong></div>
+<div class="animation-item-title" data-en="One character" data-ru="Один персонаж" data-es="Un personaje">One character</div>
+<div data-en="12 frames, full color and highlights, simple background — $650" data-ru="12 кадров, полный цвет и блики, простой фон — 650 долларов США" data-es="12 fotogramas, color completo y reflejos, fondo simple — 650 dólares estadounidenses">12 frames, full color and highlights, simple background — <strong>$650</strong></div>
 </div>
 <div class="animation-item">
-<div class="animation-item-title" data-en="Sketch with two characters" data-ru="Скетчевая с двумя персонажами" data-es="Boceto con dos personajes">Скетчевая с двумя персонажами</div>
-<div data-en="10 frames, black & white color, no background — $380" data-ru="10 кадров, чб цвет, без фона — 380 долларов США" data-es="10 fotogramas, color blanco y negro, sin fondo — 380 dólares estadounidenses">10 кадров, чб цвет, без фона — <strong>380 долларов США</strong></div>
+<div class="animation-item-title" data-en="Sketch with two characters" data-ru="Скетчевая с двумя персонажами" data-es="Boceto con dos personajes">Sketch with two characters</div>
+<div data-en="10 frames, black & white color, no background — $380" data-ru="10 кадров, чб цвет, без фона — 380 долларов США" data-es="10 fotogramas, color blanco y negro, sin fondo — 380 dólares estadounidenses">10 frames, black & white color, no background — <strong>$380</strong></div>
 </div>
-<h4 class="tos-toggle" onclick="toggleInfo()" data-en="More info" data-ru="Подробнее" data-es="Más información">Подробнее</h4>
+<h4 class="tos-toggle" onclick="toggleInfo()" data-en="More info" data-ru="Подробнее" data-es="Más información">More info</h4>
 <div class="tos-content" id="anim-info">
-<p data-en="I do not charge extra for character complexity." data-ru="Я не беру доплату за сложность персонажа." data-es="No cobro extra por la complejidad del personaje."><strong>Я не беру доплату за сложность персонажа.</strong> <span data-en="Small details — spots, patterns, etc. — are simplified and reduced, and wings are folded or hidden." data-ru="Мелкие детали — пятна, узоры и прочее — упрощаются и урезаются, а крылья сложены или скрыты." data-es="Los detalles pequeños (manchas, patrones, etc.) se simplifican y reducen, y las alas se pliegan o esconden.">Мелкие детали — пятна, узоры и прочее — упрощаются и урезаются, а крылья сложены или скрыты.</span></p>
-<p data-en="Each animation is looped." data-ru="Каждая анимация зациклена." data-es="Cada animación está en bucle."><strong>Каждая анимация зациклена.</strong></p>
-<p data-en="There are no shadows, but if it really improves the appearance somewhere, I can add a small hard shadow." data-ru="Теней нет, но если где-то это реально улучшит внешний вид, я могу добавить маленькую жесткую тень." data-es="No hay sombras, pero si realmente mejora la apariencia en algún lugar, puedo agregar una pequeña sombra dura.">Теней нет, но если где-то это реально улучшит внешний вид, я могу добавить маленькую жесткую тень.</p>
-<p data-en="Compositing is applied: blur, haze, etc. depending on atmosphere and idea." data-ru="Проходит композинг: размытие, дымка и т.д. в зависимости от атмосферы и идеи." data-es="Se aplica composición: desenfoque, neblina, etc. dependiendo de la atmósfera e idea.">Проходит композинг: размытие, дымка и т.д. в зависимости от атмосферы и идеи.</p>
-<p data-en="Included in the price: breathing, tears, salivation and lube on request." data-ru="В стоимость включено: дыхание, слезы, слюноотделение и смазка по желанию." data-es="Incluido en el precio: respiración, lágrimas, salivación y lubricante a pedido."><strong>В стоимость включено:</strong> дыхание, слезы, слюноотделение и смазка по желанию.</p>
-<p data-en="Final files are provided in WEBM, GIF and video format, in full resolution." data-ru="Итоговые файлы предоставляются в WEBM, GIF и видеоформате, в полном разрешении." data-es="Los archivos finales se proporcionan en formato WEBM, GIF y video, en resolución completa.">Итоговые файлы предоставляются в <strong>WEBM, GIF и видеоформате</strong>, в полном разрешении.</p>
-<p data-en="Work stages:" data-ru="Этапы работы:" data-es="Etapas del trabajo:"><strong>Этапы работы:</strong></p>
+<p data-en="I do not charge extra for character complexity." data-ru="Я не беру доплату за сложность персонажа." data-es="No cobro extra por la complejidad del personaje."><strong>I do not charge extra for character complexity.</strong> <span data-en="Small details — spots, patterns, etc. — are simplified and reduced, and wings are folded or hidden." data-ru="Мелкие детали — пятна, узоры и прочее — упрощаются и урезаются, а крылья сложены или скрыты." data-es="Los detalles pequeños (manchas, patrones, etc.) se simplifican y reducen, y las alas se pliegan o esconden.">Small details — spots, patterns, etc. — are simplified and reduced, and wings are folded or hidden.</span></p>
+<p data-en="Each animation is looped." data-ru="Каждая анимация зациклена." data-es="Cada animación está en bucle."><strong>Each animation is looped.</strong></p>
+<p data-en="There are no shadows, but if it really improves the appearance somewhere, I can add a small hard shadow." data-ru="Теней нет, но если где-то это реально улучшит внешний вид, я могу добавить маленькую жесткую тень." data-es="No hay sombras, pero si realmente mejora la apariencia en algún lugar, puedo agregar una pequeña sombra dura.">There are no shadows, but if it really improves the appearance somewhere, I can add a small hard shadow.</p>
+<p data-en="Compositing is applied: blur, haze, etc. depending on atmosphere and idea." data-ru="Проходит композинг: размытие, дымка и т.д. в зависимости от атмосферы и идеи." data-es="Se aplica composición: desenfoque, neblina, etc. dependiendo de la atmósfera e idea.">Compositing is applied: blur, haze, etc. depending on atmosphere and idea.</p>
+<p data-en="Included in the price: breathing, tears, salivation and lube on request." data-ru="В стоимость включено: дыхание, слезы, слюноотделение и смазка по желанию." data-es="Incluido en el precio: respiración, lágrimas, salivación y lubricante a pedido."><strong>Included in the price:</strong> breathing, tears, salivation and lube on request.</p>
+<p data-en="Final files are provided in WEBM, GIF and video format, in full resolution." data-ru="Итоговые файлы предоставляются в WEBM, GIF и видеоформате, в полном разрешении." data-es="Los archivos finales se proporcionan en formato WEBM, GIF y video, en resolución completa.">Final files are provided in <strong>WEBM, GIF and video format</strong>, in full resolution.</p>
+<p data-en="Work stages:" data-ru="Этапы работы:" data-es="Etapas del trabajo:"><strong>Work stages:</strong></p>
 <ol>
-<li data-en="First frame sketch — coordination of poses, ideas and characters." data-ru="Скетч первого кадра — согласование поз, идей и персонажей." data-es="Boceto del primer fotograma — coordinación de poses, ideas y personajes.">Скетч первого кадра — согласование поз, идей и персонажей.</li>
-<li data-en="Rough animatic — visualization of movement." data-ru="Грубый аниматик — визуализация движения." data-es="Animático aproximado — visualización del movimiento.">Грубый аниматик — визуализация движения.</li>
-<li data-en="Cleaned animatic — preparation for final coloring." data-ru="Очищенный аниматик — подготовка к финальной покраске." data-es="Animático limpio — preparación para el coloreado final.">Очищенный аниматик — подготовка к финальной покраске.</li>
-<li data-en="Fully colored one frame — approval of color palette." data-ru="Полностью раскрашенный один кадр — утверждение цветовой палитры." data-es="Un fotograma completamente coloreado — aprobación de la paleta de colores.">Полностью раскрашенный один кадр — утверждение цветовой палитры.</li>
-<li data-en="Final animation." data-ru="Финальная анимация." data-es="Animación final.">Финальная анимация.</li>
+<li data-en="First frame sketch — coordination of poses, ideas and characters." data-ru="Скетч первого кадра — согласование поз, идей и персонажей." data-es="Boceto del primer fotograma — coordinación de poses, ideas y personajes.">First frame sketch — coordination of poses, ideas and characters.</li>
+<li data-en="Rough animatic — visualization of movement." data-ru="Грубый аниматик — визуализация движения." data-es="Animático aproximado — visualización del movimiento.">Rough animatic — visualization of movement.</li>
+<li data-en="Cleaned animatic — preparation for final coloring." data-ru="Очищенный аниматик — подготовка к финальной покраске." data-es="Animático limpio — preparación para el coloreado final.">Cleaned animatic — preparation for final coloring.</li>
+<li data-en="Fully colored one frame — approval of color palette." data-ru="Полностью раскрашенный один кадр — утверждение цветовой палитры." data-es="Un fotograma completamente coloreado — aprobación de la paleta de colores.">Fully colored one frame — approval of color palette.</li>
+<li data-en="Final animation." data-ru="Финальная анимация." data-es="Animación final.">Final animation.</li>
 </ol>
-<p data-en="Edits are possible only at stages 1, 2 and 4." data-ru="Правки возможны только на этапах 1, 2 и 4." data-es="Las ediciones son posibles solo en las etapas 1, 2 y 4."><u>Правки возможны только на этапах 1, 2 и 4.</u></p>
+<p data-en="Edits are possible only at stages 1, 2 and 4." data-ru="Правки возможны только на этапах 1, 2 и 4." data-es="Las ediciones son posibles solo en las etapas 1, 2 y 4."><u>Edits are possible only at stages 1, 2 and 4.</u></p>
 </div>
 </div>
 </div>
@@ -93,104 +174,197 @@ nav{display:flex;justify-content:center;gap:2rem;margin:2rem 0;}nav a{position:r
 <div class="card" id="tos" style="margin-top:2rem;">
 <h2 class="tos-toggle" onclick="toggleTOS()" data-en="TOS" data-ru="Правила" data-es="TOS">TOS</h2>
 <div class="tos-content" id="tos-content">
-<h3>1. Что я люблю / не рисую</h3>
+<h3 data-en="1. What I like / don't draw" data-ru="1. Что я люблю / не рисую" data-es="1. Lo que me gusta / no dibujo">1. What I like / don't draw</h3>
 <div class="tos-columns">
 <div class="tos-column">
-<h4><strong>ЛЮБЛЮ ЭТО!</strong></h4>
+<h4 data-en="<strong>LOVE THIS!</strong>" data-ru="<strong>ЛЮБЛЮ ЭТО!</strong>" data-es="<strong>¡ME ENCANTA ESTO!</strong>"><strong>LOVE THIS!</strong></h4>
 <ul>
-<li>Воре</li>
-<li>Минет</li>
-<li>Удушение</li>
-<li>Римминг</li>
-<li>Унижение</li>
-<li>Пальцы во рту</li>
-<li>Сквирт/писсинг</li>
-<li>Игра с сосками</li>
-<li>Лошадиные члены</li>
-<li>Разница в размере/возрасте</li>
-<li>Лапы, игры с лапами</li>
-<li>Принуждение/шантаж</li>
-<li>Двойное проникновение</li>
-<li>Игры с уретрой (саундинг)</li>
-<li>Кровь (укусы/синяки/царапины)</li>
-<li>БДСМ, мазохизм/садизм и доминирование</li>
-<li>Фембои/Переодевание в женскую одежду</li>
-<li>Проникновение в горло (глубокий минет)</li>
-<li>Проникновение в соски (легкое / среднее)</li>
+<li data-en="Vore" data-ru="Воре" data-es="Vore">Vore</li>
+<li data-en="Blowjob" data-ru="Минет" data-es="Mamada">Blowjob</li>
+<li data-en="Strangulation" data-ru="Удушение" data-es="Estrangulación">Strangulation</li>
+<li data-en="Rimming" data-ru="Римминг" data-es="Rimming">Rimming</li>
+<li data-en="Humiliation" data-ru="Унижение" data-es="Humillación">Humiliation</li>
+<li data-en="Fingers in mouth" data-ru="Пальцы во рту" data-es="Dedos en la boca">Fingers in mouth</li>
+<li data-en="Squirt/pissing" data-ru="Сквирт/писсинг" data-es="Chorro/orina">Squirt/pissing</li>
+<li data-en="Nipple play" data-ru="Игра с сосками" data-es="Juego con pezones">Nipple play</li>
+<li data-en="Horse cocks" data-ru="Лошадиные члены" data-es="Penes de caballo">Horse cocks</li>
+<li data-en="Size/age difference" data-ru="Разница в размере/возрасте" data-es="Diferencia de tamaño/edad">Size/age difference</li>
+<li data-en="Paws, paw play" data-ru="Лапы, игры с лапами" data-es="Patas, juego con patas">Paws, paw play</li>
+<li data-en="Coercion/blackmail" data-ru="Принуждение/шантаж" data-es="Coacción/chantaje">Coercion/blackmail</li>
+<li data-en="Double penetration" data-ru="Двойное проникновение" data-es="Doble penetración">Double penetration</li>
+<li data-en="Urethra play (sounding)" data-ru="Игры с уретрой (саундинг)" data-es="Juego con uretra (sondaje)">Urethra play (sounding)</li>
+<li data-en="Blood (bites/bruises/scratches)" data-ru="Кровь (укусы/синяки/царапины)" data-es="Sangre (mordeduras/moretones/arañazos)">Blood (bites/bruises/scratches)</li>
+<li data-en="BDSM, masochism/sadism and domination" data-ru="БДСМ, мазохизм/садизм и доминирование" data-es="BDSM, masoquismo/sadismo y dominación">BDSM, masochism/sadism and domination</li>
+<li data-en="Femboys/Crossdressing in women's clothing" data-ru="Фембои/Переодевание в женскую одежду" data-es="Femboys/Vestirse con ropa de mujer">Femboys/Crossdressing in women's clothing</li>
+<li data-en="Throat penetration (deep blowjob)" data-ru="Проникновение в горло (глубокий минет)" data-es="Penetración de garganta (mamada profunda)">Throat penetration (deep blowjob)</li>
+<li data-en="Nipple penetration (light / medium)" data-ru="Проникновение в соски (легкое / среднее)" data-es="Penetración de pezones (ligera / media)">Nipple penetration (light / medium)</li>
 </ul>
 </div>
 <div class="tos-column">
-<h4><strong>НЕТ, ищи другого художника!</strong></h4>
+<h4 data-en="<strong>NO, find another artist!</strong>" data-ru="<strong>НЕТ, ищи другого художника!</strong>" data-es="<strong>¡NO, busca otro artista!</strong>"><strong>NO, find another artist!</strong></h4>
 <ul>
-<li>Лактация</li>
-<li>Надувание</li>
-<li>Памперсы</li>
-<li>Рост мышц</li>
-<li>Гипержир/Гипермышцы</li>
-<li>Персонажи с ожирением</li>
-<li>Трансформация (любая)</li>
-<li>Гипер члены, сиськи и прочее</li>
-<li>Человеческие ноги/Грязные ноги</li>
-<li>Беременность/альт беременность</li>
-<li>Люди, гуманоидные, животные/ферал</li>
-<li>Очень перекаченные /сильно накаченные персонажи</li>
+<li data-en="Lactation" data-ru="Лактация" data-es="Lactancia">Lactation</li>
+<li data-en="Inflation" data-ru="Надувание" data-es="Inflación">Inflation</li>
+<li data-en="Diapers" data-ru="Памперсы" data-es="Pañales">Diapers</li>
+<li data-en="Muscle growth" data-ru="Рост мышц" data-es="Crecimiento muscular">Muscle growth</li>
+<li data-en="Hyperfat/Hypermuscles" data-ru="Гипержир/Гипермышцы" data-es="Hipergrasa/Hipermúsculos">Hyperfat/Hypermuscles</li>
+<li data-en="Obese characters" data-ru="Персонажи с ожирением" data-es="Personajes obesos">Obese characters</li>
+<li data-en="Transformation (any)" data-ru="Трансформация (любая)" data-es="Transformación (cualquiera)">Transformation (any)</li>
+<li data-en="Hyper cocks, tits and other" data-ru="Гипер члены, сиськи и прочее" data-es="Hiper penes, tetas y otros">Hyper cocks, tits and other</li>
+<li data-en="Human feet/Dirty feet" data-ru="Человеческие ноги/Грязные ноги" data-es="Pies humanos/Pies sucios">Human feet/Dirty feet</li>
+<li data-en="Pregnancy/alt pregnancy" data-ru="Беременность/альт беременность" data-es="Embarazo/embarazo alternativo">Pregnancy/alt pregnancy</li>
+<li data-en="Humans, humanoids, animals/feral" data-ru="Люди, гуманоидные, животные/ферал" data-es="Humanos, humanoides, animales/salvajes">Humans, humanoids, animals/feral</li>
+<li data-en="Very pumped / heavily pumped characters" data-ru="Очень перекаченные /сильно накаченные персонажи" data-es="Personajes muy bombeados / fuertemente bombeados">Very pumped / heavily pumped characters</li>
 </ul>
 </div>
 </div>
-<h3>2. РЕФЕРЕНС</h3>
-<p>Описания персонажей в текстовом виде не принимаются, исключением является небольшой редизайн Вашего пушистого, и если Ваш референс является скриншотом 3д модели персонажа - Вы должны предоставить готовую палитру цветов, в ином случае я самостоятельно их подберу и не гарантирую их точность.</p>
-<h3>3. ОПЛАТА</h3>
-<p>Оплата на Paypal, если Вы из СНГ - метод оплаты договорный. Заказ оплачивается полностью только после утвержденного скетча, я добавляю Вас в очередь на Trello. Вся сумма, доплаты или скидки указываются при расчете стоимости на стадии Наброска, все прозрачно. Если Вы заказываете с кем-то, позаботьтесь о том чтобы оплата была произведена строго одним счетом. Вы можете отказаться от заказа на стадии Скетча, возврат после оплаты невозможен.</p>
-<p><strong>Платежные планы доступны для заказов от суммы $300 и выше:</strong></p>
-<h4>50/50</h4>
-<ul><li>50% после скетча</li><li>50% перед финалом</li></ul>
-<h4>3 платежа</h4>
-<ul><li>30% после скетча</li><li>30% после лайна</li><li>40% перед финалом</li></ul>
-<p><strong>Сроки:</strong> при несвоевременной оплате я имею право отложить Ваш заказ в очереди Trello на какое-то время, а Вы лишаетесь возможности пользоваться планом оплаты в будущем.</p>
-<h3>4. ИСПОЛЬЗОВАНИЕ РАБОТЫ</h3>
-<p>Публикуйте свой заказ на любых площадках, я буду этому рад! Запрещено стирать, закрашивать, обрезать подпись и опубликовывать арт где-либо без подписи. Исключением является обрезка арта для аватара. Любое коммерческое использование запрещено без моего ведома и согласия. Исключением является продажа Вашего персонажа - Вы спокойно можете поднять цену своего адопта, если заказывали арт с ним. Запрещено дорисовывать, перерисовывать, доделывать скетч, лайн или любую другую стадию заказа который я Вам отправлял в процессе работы или готовую работу, или передавать что-то из этого другому художнику. Я имею право использовать Ваш заказ в портфолио, обрезать, изменять и использовать в своем портфолио и рекламе. Отклоненные скетчи могут использоваться мной в будущем, без использования и участия Ваших персонажей.</p>
-<p><strong>Начиная работать со мной, Вы полностью соглашаетесь с Условиями.</strong></p>
+<h3 data-en="2. REFERENCE" data-ru="2. РЕФЕРЕНС" data-es="2. REFERENCIA">2. REFERENCE</h3>
+<p data-en="Text descriptions of characters are not accepted, except for a minor redesign of your furry, and if your reference is a screenshot of a 3D model of a character - you must provide a ready-made color palette, otherwise I will select them myself and do not guarantee their accuracy." data-ru="Описания персонажей в текстовом виде не принимаются, исключением является небольшой редизайн Вашего пушистого, и если Ваш референс является скриншотом 3д модели персонажа - Вы должны предоставить готовую палитру цветов, в ином случае я самостоятельно их подберу и не гарантирую их точность." data-es="No se aceptan descripciones de texto de personajes, excepto para un rediseño menor de tu furry, y si tu referencia es una captura de pantalla de un modelo 3D de un personaje, debes proporcionar una paleta de colores lista; de lo contrario, la seleccionaré yo mismo y no garantizo su precisión.">Text descriptions of characters are not accepted, except for a minor redesign of your furry, and if your reference is a screenshot of a 3D model of a character - you must provide a ready-made color palette, otherwise I will select them myself and do not guarantee their accuracy.</p>
+<h3 data-en="3. PAYMENT" data-ru="3. ОПЛАТА" data-es="3. PAGO">3. PAYMENT</h3>
+<p data-en="Payment via Paypal, if you are from CIS - payment method is negotiable. The order is paid in full only after the approved sketch, I add you to the Trello queue. The full amount, surcharges or discounts are indicated when calculating the cost at the Sketch stage, everything is transparent. If you order with someone, make sure that the payment is made strictly with one bill. You can refuse the order at the Sketch stage, refund after payment is not possible." data-ru="Оплата на Paypal, если Вы из СНГ - метод оплаты договорный. Заказ оплачивается полностью только после утвержденного скетча, я добавляю Вас в очередь на Trello. Вся сумма, доплаты или скидки указываются при расчете стоимости на стадии Наброска, все прозрачно. Если Вы заказываете с кем-то, позаботьтесь о том чтобы оплата была произведена строго одним счетом. Вы можете отказаться от заказа на стадии Скетча, возврат после оплаты невозможен." data-es="Pago a través de Paypal, si eres de la CEI - el método de pago es negociable. El pedido se paga en su totalidad solo después del boceto aprobado, te agrego a la cola de Trello. El monto total, los recargos o descuentos se indican al calcular el costo en la etapa de Boceto, todo es transparente. Si ordenas con alguien, asegúrate de que el pago se realice estrictamente con una factura. Puedes rechazar el pedido en la etapa de Boceto, el reembolso después del pago no es posible.">Payment via Paypal, if you are from CIS - payment method is negotiable. The order is paid in full only after the approved sketch, I add you to the Trello queue. The full amount, surcharges or discounts are indicated when calculating the cost at the Sketch stage, everything is transparent. If you order with someone, make sure that the payment is made strictly with one bill. You can refuse the order at the Sketch stage, refund after payment is not possible.</p>
+<p data-en="<strong>Payment plans are available for orders of $300 and above:</strong>" data-ru="<strong>Платежные планы доступны для заказов от суммы $300 и выше:</strong>" data-es="<strong>Los planes de pago están disponibles para pedidos de $300 y superiores:</strong>"><strong>Payment plans are available for orders of $300 and above:</strong></p>
+<h4 data-en="50/50" data-ru="50/50" data-es="50/50">50/50</h4>
+<ul>
+<li data-en="50% after sketch" data-ru="50% после скетча" data-es="50% después del boceto">50% after sketch</li>
+<li data-en="50% before final" data-ru="50% перед финалом" data-es="50% antes del final">50% before final</li>
+</ul>
+<h4 data-en="3 payments" data-ru="3 платежа" data-es="3 pagos">3 payments</h4>
+<ul>
+<li data-en="30% after sketch" data-ru="30% после скетча" data-es="30% después del boceto">30% after sketch</li>
+<li data-en="30% after line" data-ru="30% после лайна" data-es="30% después del lineado">30% after line</li>
+<li data-en="40% before final" data-ru="40% перед финалом" data-es="40% antes del final">40% before final</li>
+</ul>
+<p data-en="<strong>Deadlines:</strong> in case of untimely payment, I have the right to postpone your order in the Trello queue for some time, and you lose the opportunity to use the payment plan in the future." data-ru="<strong>Сроки:</strong> при несвоевременной оплате я имею право отложить Ваш заказ в очереди Trello на какое-то время, а Вы лишаетесь возможности пользоваться планом оплаты в будущем." data-es="<strong>Plazos:</strong> en caso de pago no oportuno, tengo derecho a posponer su pedido en la cola de Trello por algún tiempo, y usted pierde la oportunidad de usar el plan de pago en el futuro."><strong>Deadlines:</strong> in case of untimely payment, I have the right to postpone your order in the Trello queue for some time, and you lose the opportunity to use the payment plan in the future.</p>
+<h3 data-en="4. USE OF WORK" data-ru="4. ИСПОЛЬЗОВАНИЕ РАБОТЫ" data-es="4. USO DEL TRABAJO">4. USE OF WORK</h3>
+<p data-en="Publish your order on any platforms, I will be happy about it! It is forbidden to erase, paint over, crop the signature and publish art anywhere without a signature. The exception is cropping art for an avatar. Any commercial use is prohibited without my knowledge and consent. The exception is the sale of your character - you can safely raise the price of your adopt if you ordered art with it. It is forbidden to finish drawing, redraw, complete a sketch, line or any other stage of the order that I sent you during the work or finished work, or transfer any of this to another artist. I have the right to use your order in a portfolio, crop, modify and use in my portfolio and advertising. Rejected sketches may be used by me in the future, without the use and participation of your characters." data-ru="Публикуйте свой заказ на любых площадках, я буду этому рад! Запрещено стирать, закрашивать, обрезать подпись и опубликовывать арт где-либо без подписи. Исключением является обрезка арта для аватара. Любое коммерческое использование запрещено без моего ведома и согласия. Исключением является продажа Вашего персонажа - Вы спокойно можете поднять цену своего адопта, если заказывали арт с ним. Запрещено дорисовывать, перерисовывать, доделывать скетч, лайн или любую другую стадию заказа который я Вам отправлял в процессе работы или готовую работу, или передавать что-то из этого другому художнику. Я имею право использовать Ваш заказ в портфолио, обрезать, изменять и использовать в своем портфолио и рекламе. Отклоненные скетчи могут использоваться мной в будущем, без использования и участия Ваших персонажей." data-es="Publica tu pedido en cualquier plataforma, ¡me alegrará! Está prohibido borrar, pintar sobre, recortar la firma y publicar arte en cualquier lugar sin firma. La excepción es recortar el arte para un avatar. Cualquier uso comercial está prohibido sin mi conocimiento y consentimiento. La excepción es la venta de tu personaje: puedes aumentar con seguridad el precio de tu adopt si ordenaste arte con él. Está prohibido terminar de dibujar, redibujar, completar un boceto, línea o cualquier otra etapa del pedido que te envié durante el trabajo o el trabajo terminado, o transferir cualquiera de esto a otro artista. Tengo derecho a usar tu pedido en un portafolio, recortar, modificar y usar en mi portafolio y publicidad. Los bocetos rechazados pueden ser utilizados por mí en el futuro, sin el uso y participación de tus personajes.">Publish your order on any platforms, I will be happy about it! It is forbidden to erase, paint over, crop the signature and publish art anywhere without a signature. The exception is cropping art for an avatar. Any commercial use is prohibited without my knowledge and consent. The exception is the sale of your character - you can safely raise the price of your adopt if you ordered art with it. It is forbidden to finish drawing, redraw, complete a sketch, line or any other stage of the order that I sent you during the work or finished work, or transfer any of this to another artist. I have the right to use your order in a portfolio, crop, modify and use in my portfolio and advertising. Rejected sketches may be used by me in the future, without the use and participation of your characters.</p>
+<p data-en="<strong>By starting to work with me, you fully agree to the Terms.</strong>" data-ru="<strong>Начиная работать со мной, Вы полностью соглашаетесь с Условиями.</strong>" data-es="<strong>Al comenzar a trabajar conmigo, aceptas plenamente los Términos.</strong>"><strong>By starting to work with me, you fully agree to the Terms.</strong></p>
 </div>
 </div>
 </section>
 <footer>© 2025 MR.R1N. All rights reserved.</footer>
+
+<!-- Кнопка прокрутки вверх -->
+<div class="scroll-to-top" id="scrollToTop">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 8l-6 6h12z"/>
+    </svg>
+</div>
+
 <script>
+// Функции для toggle
 function toggleTOS(){const t=document.getElementById('tos-content');t.style.maxHeight=t.style.maxHeight?'':'2000px';t.style.opacity=t.style.opacity==='1'?'0':'1';}
 function toggleInfo(){const t=document.getElementById('anim-info');t.style.maxHeight=t.style.maxHeight?'':'1200px';t.style.opacity=t.style.opacity==='1'?'0':'1';}
 function toggleArtInfo(){const t=document.getElementById('art-info');t.style.maxHeight=t.style.maxHeight?'':'800px';t.style.opacity=t.style.opacity==='1'?'0':'1';}
 
-// Функция перевода
-document.addEventListener('DOMContentLoaded', function() {
-    const langButtons = document.querySelectorAll('.header-lang button');
+// Функция перевода с английским языком по умолчанию
+function setLanguage(lang) {
+    // Обновляем все элементы с data-атрибутами
+    document.querySelectorAll('[data-en]').forEach(element => {
+        const translatedText = element.getAttribute(`data-${lang}`);
+        if (translatedText) {
+            // Проверяем, содержит ли текст HTML-теги
+            if (translatedText.includes('<')) {
+                element.innerHTML = translatedText;
+            } else {
+                element.textContent = translatedText;
+            }
+        }
+    });
     
-    langButtons.forEach(button => {
+    // Обновляем заголовок страницы
+    const titleMap = {
+        'en': 'MR.R1N - 2D Furry Artist & Animator',
+        'ru': 'MR.R1N - 2D Фурри Артист и Аниматор',
+        'es': 'MR.R1N - Artista y Animador 2D Furry'
+    };
+    if (titleMap[lang]) {
+        document.title = titleMap[lang];
+    }
+    
+    // Обновляем активную кнопку
+    document.querySelectorAll('.header-lang button').forEach(btn => {
+        btn.style.background = '';
+        btn.style.color = '';
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.style.background = 'var(--accent)';
+            btn.style.color = 'var(--bg-dark)';
+        }
+    });
+    
+    // Сохраняем выбранный язык в localStorage
+    localStorage.setItem('selectedLanguage', lang);
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем сохраненный язык или устанавливаем английский по умолчанию
+    const savedLang = localStorage.getItem('selectedLanguage') || 'en';
+    setLanguage(savedLang);
+    
+    // Назначаем обработчики кнопок перевода
+    document.querySelectorAll('.header-lang button').forEach(button => {
         button.addEventListener('click', function() {
             const lang = this.getAttribute('data-lang');
-            
-            // Обновляем все элементы с data-атрибутами
-            document.querySelectorAll('[data-en]').forEach(element => {
-                if (element.getAttribute(`data-${lang}`)) {
-                    element.textContent = element.getAttribute(`data-${lang}`);
-                }
-            });
-            
-            // Обновляем текст в span внутри .trello-bubble
-            const bubble = document.querySelector('.trello-bubble');
-            if (bubble && bubble.getAttribute(`data-${lang}`)) {
-                bubble.textContent = bubble.getAttribute(`data-${lang}`);
-            }
-            
-            // Обновляем заголовок страницы
-            const titleMap = {
-                'en': 'MR.R1N - 2D Furry Artist & Animator',
-                'ru': 'MR.R1N - 2D Фурри Артист и Аниматор',
-                'es': 'MR.R1N - Artista y Animador 2D Furry'
-            };
-            if (titleMap[lang]) {
-                document.title = titleMap[lang];
-            }
+            setLanguage(lang);
         });
     });
+    
+    // Кнопка прокрутки вверх
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    let hasPulsed = false;
+    
+    // Показываем/скрываем кнопку при прокрутке
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('visible');
+            
+            // Добавляем легкую пульсацию при первом появлении
+            if (!hasPulsed) {
+                scrollToTopBtn.classList.add('pulse');
+                setTimeout(() => {
+                    scrollToTopBtn.classList.remove('pulse');
+                    hasPulsed = true;
+                }, 2000);
+            }
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+            scrollToTopBtn.classList.remove('pulse');
+        }
+    });
+    
+    // Быстрая прокрутка при клике
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Добавляем клавишу "Home" для быстрой прокрутки
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Home') {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            e.preventDefault();
+        }
+    });
+});
+
+// Добавляем обработку нажатия на заголовки TOS для переключения
+document.querySelectorAll('.tos-toggle').forEach(toggle => {
+    if (!toggle.onclick) {
+        toggle.style.cursor = 'pointer';
+        toggle.addEventListener('click', function() {
+            const targetId = this.getAttribute('onclick')?.match(/toggle(\w+)\(\)/)?.[1];
+            if (targetId) {
+                if (targetId === 'TOS') toggleTOS();
+                else if (targetId === 'Info') toggleInfo();
+                else if (targetId === 'ArtInfo') toggleArtInfo();
+            }
+        });
+    }
 });
 </script>
 </body>
